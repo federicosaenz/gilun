@@ -26,12 +26,15 @@ final class Autoload {
 	public static function load($class) {
 		if(!self::$classesCollection->hasItem($class)) {
 			self::$classesCollection->addItem($class,self::getClassPath($class));
-			self::$classesCollection->recompile = true;
-		}
+			self::$classesCollection->recompile();
+		} 
+		
+		include_once(self::$classesCollection->getItem($class));
 	}
 
 	public function getClassPath($className) {
-		$files = Files::rglob($className."*",0,PATH_SYSTEM);
+		$files = Files::rglob($className.".*.php",PATH_SYSTEM);
+		return isset($files[0]) ? $files[0] : null;
 	}
 }
 ?>
