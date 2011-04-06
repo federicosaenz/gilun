@@ -24,15 +24,14 @@ final class Autoload {
 	}
 
 	public static function load($class) {
-		if(self::$classesCollection->hasItem($class)) {
+		if(!self::$classesCollection->hasItem($class)) {
 			self::$classesCollection->addItem($class,self::getClassPath($class));
 			self::$classesCollection->recompile = true;
 		}
 	}
 
-
-	public function getClassPath() {
-		Files::recursiveGlob();
+	public function getClassPath($className) {
+		$files = Files::rglob($className."*",0,PATH_SYSTEM);
 	}
 }
 ?>
