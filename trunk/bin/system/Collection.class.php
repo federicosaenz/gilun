@@ -31,7 +31,7 @@ final class Collection {
 	 * @param string $cacheFile
 	 */
 	public function __construct($cacheFile=null) {
-		self::$cachefile = $cacheFile;
+		$this->cachefile = $cacheFile;
 	}
 
 	/**
@@ -39,9 +39,9 @@ final class Collection {
 	 * @return array
 	 */
 	public function getCollection() {
-		if(is_readable(self::$cachefile)) {
+		if(is_readable($this->cachefile)) {
 			if(!$this->items) {
-				$this->items = include_once(self::$cachefile);
+				$this->items = include_once($this->cachefile);
 			} 
 		}
 		return $this->items;
@@ -63,6 +63,20 @@ final class Collection {
 	 */
 	public function addItem($key,$value) {
 		$this->items[$key] = $value;
+	}
+
+	
+	public function getItem($key) {
+		return $this->hasItem($key) ? $this->items[$key] : false;
+	}
+
+	public function recompile() {
+		$data  = "<?php\r\n";
+		foreach($this->items as $key=>$value) {
+			$data .= "\$c['$key'] = '$value';\r\n";
+		}
+		$data .= "?>";
+		file_put_contents($this->cachefile, $data);
 	}
 }
 ?>
