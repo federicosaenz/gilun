@@ -49,11 +49,11 @@ final class Collection {
 
 	/**
 	 * Devuelve si el item buscado se encuentra en la coleccion
-	 * @param mixed $item (el key de la coleccion)
+	 * @param mixed $key (el key de la coleccion)
 	 * @return boolean
 	 */
-	public function hasItem($item) {
-		return (isset($this->items[$item]));
+	public function hasItem($key) {
+		return (isset($this->items[$key]));
 	}
 
 	/**
@@ -61,9 +61,8 @@ final class Collection {
 	 * @param mixed $item
 	 * @param mixed $value
 	 */
-	public function addItem($item,$value) {
-//		$files = Files::rglob($item, 0, PATH_SYSTEM);
+	public function addItem($key,$value) {
+		$this->items[$key] = $value;
 	}
 }
 ?>
-

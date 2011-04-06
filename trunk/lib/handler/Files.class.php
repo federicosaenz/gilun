@@ -11,17 +11,19 @@
 final class Files {
 
 	/**
-	 * @author php.net
+	 * @author Federico Saenz
 	 * @param int $pattern El patron que recibe glob()
 	 * @param int $flags Los flags que recibe glob()
 	 * @param string $path El path del directorio a escanear
 	 * @return mixed Array de archivos que se matchearon en el directorio
 	 */
-	public static function rglob($pattern='*', $flags = 0, $path='') {
+	public static function rglob($pattern='*', $path, $flags = 0) {
 		$paths=glob($path.'*', GLOB_MARK|GLOB_ONLYDIR|GLOB_NOSORT);
-		print_r($paths);
 		$files=glob($path.$pattern, $flags);
-		foreach ($paths as $path) { $files=array_merge($files,self::rglob($pattern, $flags, $path)); }
+		foreach ($paths as $path) {
+			if(isset($files[0])) break;
+			$files = self::rglob($pattern, $path ,$flags );
+		}
 		return $files;
 	}
 
