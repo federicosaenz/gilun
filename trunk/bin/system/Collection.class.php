@@ -12,7 +12,7 @@ final class Collection {
 	 * Ruta del archivo de cache
 	 * @var string
 	 */
-	private $cachefile;
+	private static $cachefile;
 
 	/**
 	 * Coleccion
@@ -22,9 +22,9 @@ final class Collection {
 
 	/**
 	 * Flag que setea el estado de la cache. Si esta seteada en true se vuelve a generar
-	 * @var <type>
+	 * @var boolean
 	 */
-	private $recompile = false;
+	public $recompile = false;
 
 	/**
 	 * Constructor de la clase
@@ -39,9 +39,9 @@ final class Collection {
 	 * @return array
 	 */
 	public function getCollection() {
-		if(is_readable(self::$filename)) {
+		if(is_readable(self::$cachefile)) {
 			if(!$this->items) {
-				$this->items = include_once(self::$filename);
+				$this->items = include_once(self::$cachefile);
 			} 
 		}
 		return $this->items;
@@ -62,7 +62,7 @@ final class Collection {
 	 * @param mixed $value
 	 */
 	public function addItem($item,$value) {
-
+//		$files = Files::rglob($item, 0, PATH_SYSTEM);
 	}
 }
 ?>

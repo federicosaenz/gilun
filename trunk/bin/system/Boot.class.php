@@ -24,9 +24,10 @@ final class Boot {
 		self::defineGlobalConstants();
 		
 		Autoload::run();
+//		$aa = new ();
 
 		Functions::register("pr","Debug::pr");
-		Functions::register("vd","Debug::vd");
+//		Functions::register("vd","Debug::vd");
 	}
 
 	/**
@@ -34,9 +35,12 @@ final class Boot {
 	 * @return void
 	 */
 	public static function includeGlobalFiles() {
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR."Constant.class.php");
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR."Collection.class.php");
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR."Autoload.class.php");
+		$dirname = dirname(__FILE__).DIRECTORY_SEPARATOR;
+		
+		include_once($dirname."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."lib".DIRECTORY_SEPARATOR."handler".DIRECTORY_SEPARATOR."Files.class.php");
+		include_once($dirname."Constant.class.php");
+		include_once($dirname."Collection.class.php");
+		include_once($dirname."Autoload.class.php");
 	}
 
 	/**
@@ -44,10 +48,13 @@ final class Boot {
 	 * @return void
 	 */
 	public static function defineGlobalConstants() {
-		Constant::register("PATH_SYSTEM"		, dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR);
+		
+		Constant::register("PATH_SYSTEM"		, dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR);
 		Constant::register("PATH_SYSTEM_BIN"	, PATH_SYSTEM."bin".DIRECTORY_SEPARATOR);
 		Constant::register("PATH_SYSTEM_LIB"	, PATH_SYSTEM."lib".DIRECTORY_SEPARATOR);
+		Constant::register("PATH_HANDLER"		, PATH_SYSTEM_LIB."handler".DIRECTORY_SEPARATOR);
 		Constant::register("PATH_SYSTEM_LOG"	, PATH_SYSTEM."log".DIRECTORY_SEPARATOR);
+
 		
 		Constant::register("PATH_PROJECT"		, self::$dirpath);
 		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."html");
