@@ -5,7 +5,7 @@
  * @package	pattern
  * @author	Federico Saenz
  * @version	1.0 05/04/2011
- * @acess abstract
+ * 
  */
 abstract class Singleton {
 

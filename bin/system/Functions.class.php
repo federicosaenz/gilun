@@ -1,11 +1,14 @@
 <?php
-/* Clase que define el comportamiento de las funciones generales del sitio
+/**
+ * Clase que define el comportamiento de las funciones generales del sitio
+ *
  * @author Federico Saenz
  * @date 05/04/2011
  * @package Bin
- * @subpackage Autoload
+ * @subpackage System
  * @version 1.0
- */
+ * 
+ **/
 ;
 final class Functions {
 
@@ -49,6 +52,7 @@ final class Functions {
 		for($i=1;$i<=$numberParams;$i++) {
 			$params[] = "\$arg$i";
 		}
+		
 		if(!function_exists($alias)) {
 			eval("function ".$alias."(".implode(",",$params).") {return ".$classMethod."(".implode(",",$params).");}");
 			if(!isset(self::$registeredFunctions[$name]))  self::$registeredFunctions[$name] = $classMethod;

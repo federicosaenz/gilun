@@ -1,8 +1,13 @@
 <?php
 /**
  * Contenedor de coleccion de tipos con cache a disco
+ * 
  * @author Federico Saenz
  * @date 06/04/2011
+ * @package Bin
+ * @subpackage System
+ * @version 1.0
+ *
  *
  */
 
@@ -65,11 +70,19 @@ final class Collection {
 		$this->items[$key] = $value;
 	}
 
-	
+	/**
+	 * Devuelve un item segun el key
+	 * @param mixed $key
+	 * @return mixed
+	 */
 	public function getItem($key) {
 		return $this->hasItem($key) ? $this->items[$key] : false;
 	}
 
+	/**
+	 * Recompila el archivo de clases
+	 * @return void
+	 */
 	public function recompile() {
 		$data  = "<?php\r\n";
 		foreach($this->items as $key=>$value) {
