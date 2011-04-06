@@ -1,11 +1,13 @@
 <?php
 /**
  * Clase para manejo de archivos
+ *
  * @author Federico Saenz (federicosaenz@gmail.com)
  * @date 06/04/2011
  * @version 1.0
  * @package Lib
  * @subpackage Handler
+ * 
  */
 
 final class Files {

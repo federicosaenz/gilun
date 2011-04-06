@@ -1,10 +1,12 @@
 <?php
 /* Clase que da inicio a las configuraciones del sistema
+ *
  * @author Federico Saenz
  * @date 05/04/2011
  * @package Bin
- * @subpackage Autoload
+ * @subpackage System
  * @version 1.0
+ * 
  */
 
 final class Boot {
@@ -24,10 +26,6 @@ final class Boot {
 		self::defineGlobalConstants();
 		
 		Autoload::run();
-//		$aa = new ();
-
-		Functions::register("pr","Debug::pr");
-//		Functions::register("vd","Debug::vd");
 	}
 
 	/**
@@ -57,9 +55,8 @@ final class Boot {
 
 		
 		Constant::register("PATH_PROJECT"		, self::$dirpath);
-		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."html");
-		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."system");
-		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."system");
+		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."html".DIRECTORY_SEPARATOR);
+		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR);
 	}
 
 	/**
