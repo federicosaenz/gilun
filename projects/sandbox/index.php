@@ -3,6 +3,4 @@ include_once(dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.".."
 
 Boot::setDirPath(dirname(__FILE__));
 Boot::run();
-
-
 ?>
