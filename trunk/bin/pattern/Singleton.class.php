@@ -31,7 +31,7 @@ abstract class Singleton {
     public static function getInstance() {
         static $Instance = array();
         $class = self::$classname;
-        if (!isset($Instance[$class])) $Instance[$class] = new $class();
+		if (!isset($Instance[$class])) $Instance[$class] = new $class();
 
         return $Instance[$class];
     }
