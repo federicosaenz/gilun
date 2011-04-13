@@ -22,6 +22,7 @@ abstract class Page {
 	 * @param string $output
 	 */
 	public function __construct($output) {
+		$output = ucfirst($output);
 		if(class_exists($output)) {
 			$this->output = new $output();
 		}

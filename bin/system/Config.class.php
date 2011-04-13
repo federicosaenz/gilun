@@ -78,7 +78,7 @@ final class Config {
 					$page->getOutput()->setTpl($value);
 				break;
 				default:
-					$page->getOutput()->$propery = $value;
+					$page->getOutput()->$property = $value;
 				break;
 			}
 		}
