@@ -16,6 +16,11 @@ abstract class Output {
 	protected $engine;
 
 	/**
+	 * Contiene el path del archivo de template
+	 */
+	protected $tpl;
+
+	/**
 	 * Contiene el valor que se escribe
 	 * @var string
 	 */
@@ -25,8 +30,16 @@ abstract class Output {
 	 * Setea el motor que va a manejar el output de tipo Html
 	 * @param stdClass $engine
 	 */
-	public function setEngine(stdClass $engine) {
+	public function setEngine($engine) {
 		$this->engine = $engine;
+	}
+
+	/**
+	 * Setter de tpl
+	 * @param string $tpl
+	 */
+	public function setTpl($tpl) {
+		$this->engine->setTpl($tpl);
 	}
 }
 ?>

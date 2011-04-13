@@ -5,8 +5,8 @@
 	},
 	"output" :  {
 		"html": {
-			"engine" : "Dom",
-			"tpl"	 : "tpl/html/schema/template1column.html",
+			"engine" : "DomHtml",
+			"tpl"	 : "schema/html/template.html",
 			"css"	 : [
 				"css/schema/general.css",
 				"css/schema/general2.css"
@@ -17,8 +17,8 @@
 			]
 		},
 		"xml" : {
-			"engine" : "Xml",
-			"tpl"	 : "tpl/xml/schema/template1column.xml"
+			"engine" : "DomXml",
+			"tpl"	 : "schema/xml/template.xml"
 		}
 	}
 }

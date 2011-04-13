@@ -50,7 +50,7 @@ final class Application extends Singleton {
 			$manager = new $className(ucfirst(Get::getParameter("output","OutputHtml")));
 			
 			if(method_exists($manager, $accion = Get::getParameter("accion","render")) ) {
-//				$manager->setData($manager->$accion());
+				$manager->getOutput()->setData($manager->$accion());
 //				$manager->getOutput()->write();
 			} else {
 				#EXCEPCION: no existe la accion para ese manager
