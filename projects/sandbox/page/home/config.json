@@ -1,0 +1,24 @@
+{
+	"cache" : {
+		"status"	: "enabled",
+		"expires"	:  3600
+	},
+	"output" :  {
+		"html": {
+			"engine" : "Dom",
+			"tpl"	 : "tpl/html/schema/template1column.html",
+			"css"	 : [
+				"css/schema/general.css",
+				"css/schema/general2.css"
+			],
+			"js"	 : [
+				"js/schema/general.js",
+				"js/schema/general2.js"
+			]
+		},
+		"xml" : {
+			"engine" : "Xml",
+			"tpl"	 : "tpl/xml/schema/template1column.xml"
+		}
+	}
+}
