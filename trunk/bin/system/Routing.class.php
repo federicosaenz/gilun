@@ -10,6 +10,14 @@
  */
 final class Routing {
 
+	const ROUTING_FILE = "routing.json";
 	
+	/**
+	 * Ejecuta el ruteo, y define la accion correspondiente
+	 */
+	public static function run() {
+		
+		
+	}
 }
 ?>

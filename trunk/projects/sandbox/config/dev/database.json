@@ -1,0 +1,18 @@
+{
+	"debug" : true,
+
+	"databases": [
+		"read" : {
+			"host"	: "localhost",
+			"db"	: "guiareceta",
+			"user"	: "root",
+			"pass"	: "fede81fede"
+		},
+		"write" : {
+			"host"	: "localhost",
+			"db"	: "guiareceta",
+			"user"	: "root",
+			"pass"	: "fede81fede"
+		}
+	]
+}

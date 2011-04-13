@@ -6,10 +6,10 @@
  * @version 1.0 11/04/2011
  * @package Lib
  * @subpackage helper
- * 
+ *
  */
 
-final class Server {
+final class Get {
 
 	/**
 	 * Devuelve un valor de $_SERVER
@@ -17,8 +17,8 @@ final class Server {
 	 * @param mixed $defaultValue
 	 * @return mixed
 	 */
-	public static function get($fieldName,$defaultValue="") {
-		return isset($_SERVER[$fieldName]) ? $_SERVER[$fieldName] : $defaultValue;
+	public static function getParameter($fieldName,$defaultValue="") {
+		return isset($_GET[$fieldName]) ? $_GET[$fieldName] : $defaultValue;
 	}
 
 	/**
@@ -26,8 +26,8 @@ final class Server {
 	 * @param string $fieldName
 	 * @param mixed $value
 	 */
-	public static function set($fieldName,$value) {
-		$_SERVER[$fieldName] = $value;
+	public static function setParameter($fieldName,$value) {
+		$_GET[$fieldName] = $value;
 	}
 }
 ?>
