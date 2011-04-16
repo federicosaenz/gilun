@@ -11,7 +11,10 @@
 
 final class Home extends Page implements IPage {
 
-	
+	/**
+	 * Devuelve el path donde se encuentra el archivo de configuracion de la pagina
+	 * @return string
+	 */
 	public function getConfigPath() {
 		return dirname(__FILE__).DIRECTORY_SEPARATOR.self::CONFIG_FILE;
 	}
@@ -20,6 +23,9 @@ final class Home extends Page implements IPage {
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
+//		$this->output->addComponent();
+		pr($this->output->getEngine());
+
 		return array("hola","mundo");
 	}
 }

@@ -68,6 +68,8 @@ final class Config {
 	public function page(Page $page) {
 		$type = $page->getOutput()->getType();
 		$cnf = self::getJson($page->getConfigPath());
+		
+		$page->data =  new $cnf->data();
 
 		foreach($cnf->output->$type as $property => $value) {
 			switch($property) {
