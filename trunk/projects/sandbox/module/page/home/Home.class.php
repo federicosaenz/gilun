@@ -16,7 +16,7 @@ final class Home extends Page implements IPage {
 	 * @return string
 	 */
 	public function getConfigPath() {
-		return dirname(__FILE__).DIRECTORY_SEPARATOR.self::CONFIG_FILE;
+		return dirname(__FILE__).DIRECTORY_SEPARATOR.get_class($this).".config.json";
 	}
 
 	/**

@@ -1,0 +1,25 @@
+{
+	"cache" : {
+		"status"	: "enabled",
+		"expires"	:  3600
+	},
+		"data" : "HomeData",
+		"output" :  {
+		"html": {
+			"engine" : "DomHtml",
+			"tpl"	 : "schema/html/template.html",
+			"css"	 : [
+				"css/schema/general.css",
+				"css/schema/general2.css"
+			],
+			"js"	 : [
+				"js/schema/general.js",
+				"js/schema/general2.js"
+			]
+		},
+		"xml" : {
+			"engine" : "DomXml",
+			"tpl"	 : "schema/xml/template.xml"
+		}
+	}
+}
