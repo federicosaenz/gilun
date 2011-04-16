@@ -27,11 +27,19 @@ abstract class Output {
 	protected $output;
 	
 	/**
-	 * Setea el motor que va a manejar el output de tipo Html
+	 * Setter de engine
 	 * @param stdClass $engine
 	 */
 	public function setEngine($engine) {
 		$this->engine = $engine;
+	}
+
+	/**
+	 * Getter de engine
+	 * @return class
+	 */
+	public function getEngine() {
+		return $this->engine;
 	}
 
 	/**

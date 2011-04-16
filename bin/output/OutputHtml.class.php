@@ -28,6 +28,5 @@ class OutputHtml extends Output {
 	public function getType() {
 		return self::OUTPUT_TYPE;
 	}
-	
 }
 ?>
