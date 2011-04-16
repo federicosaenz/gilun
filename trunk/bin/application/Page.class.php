@@ -26,7 +26,6 @@ abstract class Page {
 		if(class_exists($output)) {
 			$this->output = new $output();
 		}
-		
 		Config::page($this);
 	}
 

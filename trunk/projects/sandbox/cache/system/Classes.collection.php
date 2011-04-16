@@ -9,6 +9,7 @@ $c['Page'] = '/home/federico/sites/gilun/bin/system/../../bin/application/Page.c
 $c['IPage'] = '/home/federico/sites/gilun/bin/system/../../bin/application/IPage.interface.php';
 $c['OutputHtml'] = '/home/federico/sites/gilun/bin/system/../../lib/output/OutputHtml.class.php';
 $c['Output'] = '/home/federico/sites/gilun/bin/system/../../lib/output/Output.class.php';
+$c['HomeData'] = '/home/federico/sites/gilun/bin/system/../../projects/sandbox/page/home/HomeData.class.php';
 $c['DomHtml'] = '/home/federico/sites/gilun/bin/system/../../lib/dom/DomHtml.class.php';
-$c['IOutput'] = '';
+$c['IOutput'] = '/home/federico/sites/gilun/bin/system/../../lib/output/IOutput.interface.php';
 ?>

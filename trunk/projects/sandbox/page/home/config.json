@@ -3,6 +3,7 @@
 		"status"	: "enabled",
 		"expires"	:  3600
 	},
+	"data" : "HomeData",
 	"output" :  {
 		"html": {
 			"engine" : "DomHtml",

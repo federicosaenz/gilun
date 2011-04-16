@@ -53,7 +53,8 @@ final class Autoload {
 		if(is_readable($filename)) {
 			include_once(self::$classesCollection->getItem($class));
 		} else {
-			throw new AutoloadException();
+			echo $filename;
+//			throw new AutoloadException();
 		}
 	}
 
