@@ -1,9 +1,0 @@
-{
-	"Home" : {
-		"/": {
-			"method"	: "redirect",
-			"file"		: "index.php?manager=Home"
-		}
-	},
-	
-}
