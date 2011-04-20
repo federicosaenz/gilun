@@ -9,7 +9,7 @@
  * 
  */
 
-final class Home extends Page implements IPage {
+final class Home extends Module implements IModule {
 
 	/**
 	 * Devuelve el path donde se encuentra el archivo de configuracion de la pagina
@@ -23,9 +23,9 @@ final class Home extends Page implements IPage {
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-//		$this->output->addComponent();
-		pr($this->output->getEngine());
-
+		$Cabecera = new Cabecera(Application::getInstance()->output);
+//		print_r($this->addChild("idCopado",$Cabecera->render()));
+		
 		return array("hola","mundo");
 	}
 }

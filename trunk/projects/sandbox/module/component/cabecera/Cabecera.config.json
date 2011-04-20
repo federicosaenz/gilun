@@ -3,11 +3,11 @@
 		"status"	: "enabled",
 		"expires"	:  3600
 	},
-	"data" : "HomeData",
+	"data" : "CabeceraData",
 	"output" :  {
 		"html": {
 			"engine" : "DomHtml",
-			"tpl"	 : "schema/html/template.html",
+			"tpl"	 : "module/component/cabecera/tpl/cabecera.html",
 			"css"	 : [
 				"css/schema/general.css",
 				"css/schema/general2.css"

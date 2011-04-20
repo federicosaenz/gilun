@@ -3,11 +3,11 @@
 		"status"	: "enabled",
 		"expires"	:  3600
 	},
-		"data" : "HomeData",
-		"output" :  {
+	"data" : "HomeData",
+	"output" :  {
 		"html": {
 			"engine" : "DomHtml",
-			"tpl"	 : "schema/html/template.html",
+			"tpl"	 : "module/page/home/tpl/template.html",
 			"css"	 : [
 				"css/schema/general.css",
 				"css/schema/general2.css"

@@ -26,7 +26,40 @@ final class DomHtml implements IOutput{
 	 * @param string $src
 	 */
 	public function setTpl($src) {
-		$this->dom->loadHTML($src);
+		$this->dom->loadHTML(file_get_contents($src));
+	}
+
+	/**
+	 * Trae un nodo en funcion del id
+	 * @param string $elementId
+	 * @return node
+	 */
+	public function getElementById($elementId) {
+		return $this->dom->getElementById($elementId);
+	}
+
+	/**
+	 * Setea un valor al nodo
+	 * @param string $elementId
+	 * @param string $value
+	 */
+	public function setValue($elementId,$value) {
+		$this->getElementById($elementId)->nodeValue = $value;
+	}
+
+	/**
+	 *
+	 */
+	public function getElementsByTagName($tagName) {
+		return $this->dom->getElementsByTagName($tagName);
+	}
+
+	public function addChild($elementId,$child) {
+		
+	}
+
+	public function write() {
+		echo $this->dom->saveHTML();
 	}
 }
 ?>

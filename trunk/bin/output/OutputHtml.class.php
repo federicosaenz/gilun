@@ -28,5 +28,9 @@ class OutputHtml extends Output {
 	public function getType() {
 		return self::OUTPUT_TYPE;
 	}
+
+	public function write() {
+		return $this->engine->write();
+	}
 }
 ?>

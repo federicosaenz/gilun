@@ -24,6 +24,12 @@ final class Application extends Singleton {
 	public $config;
 
 	/**
+	 * Contiene el valor del output que se desea generar
+	 * @var string
+	 */
+	public $output;
+	
+	/**
 	 * Constructor de la clase
 	 */
 	protected function  __construct() {
@@ -47,12 +53,11 @@ final class Application extends Singleton {
 		$this->env = Config::getEnv();
 
 		if(class_exists($className = Get::getParameter("manager","Home"))) {
-			
-			$manager = new $className(ucfirst(Get::getParameter("output","OutputHtml")));
+			$manager = new $className();
 			
 			if(method_exists($manager, $accion = Get::getParameter("accion","render")) ) {
 				$manager->$accion();
-//				$manager->getOutput()->write();
+				$manager->getOutput()->write();
 			} else {
 				#EXCEPCION: no existe la accion para ese manager
 			}

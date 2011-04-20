@@ -1,15 +1,15 @@
 <?php
 /**
- * Clase abstracta para manejo de Paginas
+ * Clase abstracta para manejo de Modulos
  *
  * @author Federico Saenz
  * @version 1.0 12/04/2011
  * @package bin
  * @subpackage application
- *
+ * @uses lib/Get.class.php
  */
 
-abstract class Page {
+abstract class Module {
 
 	/**
 	 * Clase para manejo de output
@@ -21,12 +21,13 @@ abstract class Page {
 	 * Constructor de la clase. Crea la instancia de la clase que maneja el output
 	 * @param string $output
 	 */
-	public function __construct($output) {
-		$output = ucfirst($output);
+	public function __construct() {
+		$output = ucfirst(Get::getParameter("output","OutputHtml"));
+		
 		if(class_exists($output)) {
 			$this->output = new $output();
 		}
-		Config::page($this);
+		Config::module($this);
 	}
 
 	/**
