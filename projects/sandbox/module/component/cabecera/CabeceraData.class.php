@@ -9,7 +9,7 @@
  * 
  */
 
-final class HomeData  {
+final class CabeceraData  {
 
 	
 }

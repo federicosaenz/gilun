@@ -62,24 +62,25 @@ final class Config {
 
 
 	/**
-	 * Configura la pagina
-	 * @param Page $page
+	 * Configura el modulo
+	 * @param Page $module
 	 */
-	public function page(Page $page) {
-		$type = $page->getOutput()->getType();
-		$cnf = self::getJson($page->getConfigPath());
-		$page->data =  new $cnf->data();
-
+	public static function module(Module $module) {
+		$type = $module->getOutput()->getType();
+		$cnf = self::getJson($module->getConfigPath());
+		if($cnf->data) {
+			$module->data =  new $cnf->data();
+		}
 		foreach($cnf->output->$type as $property => $value) {
 			switch($property) {
 				case "engine":
-					$page->getOutput()->setEngine(new $value());
+					$module->getOutput()->setEngine(new $value());
 				break;
 				case "tpl":
-					$page->getOutput()->setTpl($value);
+					$module->getOutput()->setTpl(PATH_PROJECT.$value);
 				break;
 				default:
-					$page->getOutput()->$property = $value;
+					$module->getOutput()->$property = $value;
 				break;
 			}
 		}

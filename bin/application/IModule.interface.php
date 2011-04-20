@@ -3,7 +3,7 @@
  * Interface para managers de contenido
  */
 
-interface IPage {
+interface IModule {
 
 	const CONFIG_FILE = "config.json";
 	

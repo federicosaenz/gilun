@@ -57,10 +57,10 @@ final class Boot {
 		Constant::register("PATH_HANDLER"		, PATH_SYSTEM_LIB."handler".DIRECTORY_SEPARATOR);
 		Constant::register("PATH_SYSTEM_LOG"	, PATH_SYSTEM."log".DIRECTORY_SEPARATOR);
 
-		Constant::register("PATH_PROJECT"		, self::$dirpath);
-		Constant::register("PATH_CONFIG"		, PATH_PROJECT.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."html".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR);
+		Constant::register("PATH_PROJECT"		, self::$dirpath.DIRECTORY_SEPARATOR);
+		Constant::register("PATH_CONFIG"		, PATH_PROJECT."config".DIRECTORY_SEPARATOR);
+		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT."cache".DIRECTORY_SEPARATOR."html".DIRECTORY_SEPARATOR);
+		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT."cache".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR);
 		
 	}
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase manager de contenido Componente1
+ * Clase manager de contenido Cabecera
  *
  * @author Federico Saenz
  * @version 1.0 12/04/2011
@@ -9,14 +9,14 @@
  * 
  */
 
-final class Component1 extends Module implements IModule {
+final class Cabecera extends Module implements IModule {
 
 	/**
 	 * Devuelve el path donde se encuentra el archivo de configuracion de la pagina
 	 * @return string
 	 */
 	public function getConfigPath() {
-		return dirname(__FILE__).DIRECTORY_SEPARATOR.self::CONFIG_FILE;
+		return dirname(__FILE__).DIRECTORY_SEPARATOR.get_class($this).".config.json";
 	}
 
 	/**
@@ -24,7 +24,7 @@ final class Component1 extends Module implements IModule {
 	 */
 	public function render() {
 //		$this->output->addComponent();
-		pr($this->output->getEngine());
+//		pr($this->output->getEngine());
 
 		return array("hola","mundo");
 	}
