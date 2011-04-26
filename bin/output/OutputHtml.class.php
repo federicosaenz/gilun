@@ -32,5 +32,13 @@ class OutputHtml extends Output {
 	public function write() {
 		return $this->engine->write();
 	}
+
+	public function addChild($elementId,$child) {
+		return $this->engine->addChild($elementId,$child);
+	}
+
+	public function getContent() {
+		return $this->engine->getContent();
+	}
 }
 ?>
