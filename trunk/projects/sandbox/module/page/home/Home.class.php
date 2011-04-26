@@ -23,10 +23,10 @@ final class Home extends Module implements IModule {
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-		$Cabecera = new Cabecera(Application::getInstance()->output);
-//		print_r($this->addChild("idCopado",$Cabecera->render()));
-		
-		return array("hola","mundo");
+		$this->getOutput()->addChild("idCopado",new Cabecera(Application::getInstance()->output));
+
+//		echo $this->getOutput()->getEngine()->save();
+//		return array("hola","mundo");
 	}
 }
 ?>

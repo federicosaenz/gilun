@@ -37,5 +37,14 @@ abstract class Module {
 	public function getOutput() {
 		return $this->output;
 	}
+
+	public function write() {
+		echo $this->output->write();
+	}
+
+	public function getContent() {
+		return $this->output->getContent();
+	}
+
 }
 ?>
