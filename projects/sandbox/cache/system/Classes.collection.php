@@ -13,5 +13,6 @@ $c['HomeData'] = '/home/federico/sites/gilun/bin/system/../../projects/sandbox/m
 $c['DomHtml'] = '/home/federico/sites/gilun/bin/system/../../lib/dom/DomHtml.class.php';
 $c['IOutput'] = '/home/federico/sites/gilun/bin/system/../../bin/output/IOutput.interface.php';
 $c['Cabecera'] = '/home/federico/sites/gilun/bin/system/../../projects/sandbox/module/component/cabecera/Cabecera.class.php';
+$c['Component'] = '/home/federico/sites/gilun/bin/system/../../bin/application/Component.class.php';
 $c['CabeceraData'] = '/home/federico/sites/gilun/bin/system/../../projects/sandbox/module/component/cabecera/CabeceraData.class.php';
 ?>
