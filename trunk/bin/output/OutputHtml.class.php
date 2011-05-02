@@ -40,5 +40,9 @@ class OutputHtml extends Output {
 	public function getContent() {
 		return $this->engine->getContent();
 	}
+
+	public function setValue($elementId,$value) {
+		$this->engine->setValue($elementId,$value);
+	}
 }
 ?>

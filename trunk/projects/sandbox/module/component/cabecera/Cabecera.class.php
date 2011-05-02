@@ -9,7 +9,7 @@
  * 
  */
 
-final class Cabecera extends Module implements IModule {
+final class Cabecera extends Component implements IModule {
 
 	/**
 	 * Devuelve el path donde se encuentra el archivo de configuracion de la pagina
@@ -23,8 +23,8 @@ final class Cabecera extends Module implements IModule {
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-//		$data = $this->getData();
-		
+		echo $this->data;
+		$this->getOutput()->setValue("cabeceraTitulo","atr");
 	}
 }
 ?>
