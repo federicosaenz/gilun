@@ -23,8 +23,8 @@ final class Cabecera extends Component implements IModule {
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-		echo $this->data;
-		$this->getOutput()->setValue("cabeceraTitulo","atr");
+		$arrayDatosCabecera = $this->data->getDatosCabecera();
+		$this->getOutput()->setValue("cabeceraTitulo",$arrayDatosCabecera[0]);
 	}
 }
 ?>

@@ -11,6 +11,8 @@
 
 final class CabeceraData  {
 
-	
+	public function getDatosCabecera() {
+		return array("acavauno","acavaelotro");
+	}
 }
 ?>
