@@ -8,7 +8,6 @@
  * @subpackage output
  * 
  */
-
 class OutputHtml extends Output {
 
 

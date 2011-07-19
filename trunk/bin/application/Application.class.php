@@ -9,25 +9,26 @@
  * @uses Config
  * 
  */
+
 final class Application extends Singleton {
 
 	/**
 	 * Contiene la clase de configuracion de la aplicacion
 	 * @var stdClass
 	 */
-	public $env;
+	private $env;
 
 	/**
 	 * Contiene la clase de configuracion de la aplicacion
 	 * @var stdClass
 	 */
-	public $config;
+	private $config;
 
 	/**
 	 * Contiene el valor del output que se desea generar
 	 * @var string
 	 */
-	public $output;
+	private $output;
 	
 	/**
 	 * Constructor de la clase
@@ -45,40 +46,89 @@ final class Application extends Singleton {
 	}
 
 	/**
+	 * Getter para output
+	 * @return string
+	 */
+	public function getOutput() {
+		return $this->output;
+	}
+
+	/**
+	 * Getter para env
+	 * @return stdClass
+	 */
+	public function getEnv() {
+		return $this->env;
+	}
+
+	/**
+	 * Getter para config
+	 * @return string
+	 */
+	public function getConfig() {
+		return $this->config;
+	}
+	
+	/**
 	 * Corre la aplicacion
 	 */
 	public function run() {
-
+//		Timer::begin();
+			
 		#Traigo el objeto de configuracion del entorno
 		$this->env = Config::getEnv();
 
-		if(class_exists($className = Get::getParameter("manager","Home"))) {
-			$manager = new $className();
+		#Seteo el output
+		$this->output = Get::getParameter("output","html");
+
+		#Parametros globales
+		$manager	= Get::getParameter("manager","Home");
+		$accion		= Get::getParameter("accion","render");
+
+		if(class_exists($className = $manager)) {
+			$manager = new $className($this->output);
+			Cache::setup($manager->getCache()->status,$manager->getCache()->expires,Server::get("REQUEST_URI"));
 			
-			if(method_exists($manager, $accion = Get::getParameter("accion","render")) ) {
-				$manager->$accion();
-				$manager->getOutput()->write();
+			if($cache = Cache::read()) {
+				echo $cache;
 			} else {
-				#EXCEPCION: no existe la accion para ese manager
+				if(method_exists($manager, $accion) ) {
+					$manager->$accion();
+					$content = $manager->getOutput()->write();
+					Cache::write($content);
+					echo $content;
+				} else {
+					#EXCEPCION: no existe la accion para ese manager.
+				}
 			}
 		} else {
 			#EXCEPCION: devolver excepcion de que no existe el manager o el output es invalido
 		}
-		 
-		#Levanto la cache
-			#Si tiene cache, la muestro
+		
 
-			#Si no tiene cache,
-				#levanto la base de datos
+//		if() {
+//			echo $cache;
+//		} else {
+//			if(class_exists($className = $manager)) {
+//				$manager = new $className($this->output);
+//
+//
+//			} else {
+//
+//			}
 
-				#Creo la pagina
-				#Levanto la configuracion de la pagina
-				#Le seteo el output
-				#Le seteo el action
-				#Le seteo la data al output
-				#Imprimo el output, y se lo asigno a la cache
+
+				
+					#levanto la base de datos
+
+					#Creo la pagina
+					#Levanto la configuracion de la pagina
+					#Le seteo el output
+					#Le seteo el action
+					#Le seteo la data al output
+					#Imprimo el output, y se lo asigno a la cache
+				#
 			#
-		#
 	}
 }
 ?>

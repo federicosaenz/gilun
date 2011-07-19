@@ -10,7 +10,7 @@
  */
 
 final class Boot {
-
+	
 	/**
 	 * Path del directorio del proyecto
 	 * @var string
@@ -26,7 +26,7 @@ final class Boot {
 		self::defineGlobalConstants();
 		
 		Autoload::run();
-
+//		use bin;
 		Application::getInstance()->run();
 	}
 
@@ -35,14 +35,16 @@ final class Boot {
 	 * @return void
 	 */
 	public static function includeGlobalFiles() {
-		$dirnameBin = dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
+		if(!defined("DS")) define("DS",DIRECTORY_SEPARATOR);
+		
+		$dirnameBin = dirname(__FILE__).DS."..".DS;
 
-		include_once($dirnameBin."..".DIRECTORY_SEPARATOR."lib".DIRECTORY_SEPARATOR."helper".DIRECTORY_SEPARATOR."Files.class.php");
+		include_once($dirnameBin."..".DS."lib".DS."helper".DS."Files.class.php");
 
-		include_once($dirnameBin."useful"	.DIRECTORY_SEPARATOR."Constant.class.php");
-		include_once($dirnameBin."cache"	.DIRECTORY_SEPARATOR."Collection.class.php");
-		include_once($dirnameBin."autoload"	.DIRECTORY_SEPARATOR."AutoloadException.class.php");
-		include_once($dirnameBin."autoload"	.DIRECTORY_SEPARATOR."Autoload.class.php");
+		include_once($dirnameBin."useful"	.DS."Constant.class.php");
+		include_once($dirnameBin."cache"	.DS."Collection.class.php");
+		include_once($dirnameBin."autoload"	.DS."AutoloadException.class.php");
+		include_once($dirnameBin."autoload"	.DS."Autoload.class.php");
 	}
 
 	/**
@@ -50,17 +52,16 @@ final class Boot {
 	 * @return void
 	 */
 	public static function defineGlobalConstants() {
-		
-		Constant::register("PATH_SYSTEM"		, dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_SYSTEM_BIN"	, PATH_SYSTEM."bin".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_SYSTEM_LIB"	, PATH_SYSTEM."lib".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_HANDLER"		, PATH_SYSTEM_LIB."handler".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_SYSTEM_LOG"	, PATH_SYSTEM."log".DIRECTORY_SEPARATOR);
+		Constant::register("PATH_SYSTEM"		, dirname(__FILE__).DS."..".DS."..".DS);
+		Constant::register("PATH_SYSTEM_BIN"	, PATH_SYSTEM."bin".DS);
+		Constant::register("PATH_SYSTEM_LIB"	, PATH_SYSTEM."lib".DS);
+		Constant::register("PATH_HANDLER"		, PATH_SYSTEM_LIB."handler".DS);
+		Constant::register("PATH_SYSTEM_LOG"	, PATH_SYSTEM."log".DS);
 
-		Constant::register("PATH_PROJECT"		, self::$dirpath.DIRECTORY_SEPARATOR);
-		Constant::register("PATH_CONFIG"		, PATH_PROJECT."config".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT."cache".DIRECTORY_SEPARATOR."html".DIRECTORY_SEPARATOR);
-		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT."cache".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR);
+		Constant::register("PATH_PROJECT"		, self::$dirpath.DS);
+		Constant::register("PATH_CONFIG"		, PATH_PROJECT."config".DS);
+		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT."cache".DS."html".DS);
+		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT."cache".DS."system".DS);
 		
 	}
 

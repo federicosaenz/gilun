@@ -8,7 +8,6 @@
  * @subpackage application
  * @uses lib/Get.class.php
  */
-
 abstract class Module {
 
 	/**
@@ -18,14 +17,20 @@ abstract class Module {
 	protected $output;
 
 	/**
+	 * Configuracion de cache
+	 * @var stdClass
+	 */
+	protected $cache;
+	
+	/**
 	 * Constructor de la clase. Crea la instancia de la clase que maneja el output
 	 * @param string $output
 	 */
-	public function __construct() {
-		$output = ucfirst(Get::getParameter("output","OutputHtml"));
+	public function __construct($output) {
+		$className = "Output".ucfirst($output);
 		
-		if(class_exists($output)) {
-			$this->output = new $output();
+		if(class_exists($className)) {
+			$this->output = new $className();
 		}
 		Config::module($this);
 	}
@@ -44,6 +49,14 @@ abstract class Module {
 
 	public function getContent() {
 		return $this->output->getContent();
+	}
+
+	public function setCache($cache) {
+		$this->cache = $cache;
+	}
+
+	public function getCache() {
+		return $this->cache;
 	}
 
 }

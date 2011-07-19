@@ -8,7 +8,6 @@
  * @subpackage system
  *
  */
-
 final class Config {
 
 	/**
@@ -66,23 +65,30 @@ final class Config {
 	 * @param Page $module
 	 */
 	public static function module(Module $module) {
-		$type = $module->getOutput()->getType();
-		$cnf = self::getJson($module->getConfigPath());
-		if($cnf->data) {
-			$module->data =  new $cnf->data();
-		}
-		foreach($cnf->output->$type as $property => $value) {
-			switch($property) {
-				case "engine":
-					$module->getOutput()->setEngine(new $value());
-				break;
-				case "tpl":
-					$module->getOutput()->setTpl(PATH_PROJECT.$value);
-				break;
-				default:
-					$module->getOutput()->$property = $value;
-				break;
+		if($module->getOutput()) {
+			$type = $module->getOutput()->getType();
+			$cnf = self::getJson($module->getConfigPath());
+			if($cnf->data) {
+				$module->data =  new $cnf->data();
 			}
+			foreach($cnf->output->$type as $property => $value) {
+				switch($property) {
+					case "engine":
+						$module->getOutput()->setEngine(new $value());
+					break;
+					case "tpl":
+						$module->getOutput()->setTpl(PATH_PROJECT.$value);
+					break;
+					default:
+						$module->getOutput()->$property = $value;
+					break;
+				}
+			}
+			if($cnf->cache) {
+				$module->setCache($cnf->cache);
+			}
+		} else {
+			#Excepcion de que no existe el output
 		}
 	}
 }

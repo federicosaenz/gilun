@@ -1,6 +1,6 @@
 {
 	"cache" : {
-		"status"	: "enabled",
+		"status"	: "w",
 		"expires"	:  3600
 	},
 	"data" : "HomeData",

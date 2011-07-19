@@ -8,7 +8,7 @@
  * @subpackage autoload
  */
 
-class AutoloadException extends Exception {
+class AutoloadException extends \Exception {
 
 	public function __construct($message,$code,$previous) {
 

@@ -1,6 +1,4 @@
 {
-	"debug" : true,
-
 	"databases": [
 		"read" : {
 			"host"	: "localhost",
