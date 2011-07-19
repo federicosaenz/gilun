@@ -9,6 +9,7 @@
  * @version 1.0
  *
  */
+
 final class Autoload {
 
 	/**
@@ -53,6 +54,7 @@ final class Autoload {
 		if(is_readable($filename)) {
 			include_once(self::$classesCollection->getItem($class));
 		} else {
+			#Mostrar excepcion de autoload
 			echo $filename;
 //			throw new AutoloadException();
 		}
@@ -67,6 +69,7 @@ final class Autoload {
 	 * @return string
 	 */
 	public function getClassPath($className) {
+		
 		$files = Files::rglob($className.".*.php",PATH_SYSTEM);
 		return isset($files[0]) ? $files[0] : null;
 	}

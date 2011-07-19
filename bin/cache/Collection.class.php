@@ -10,7 +10,6 @@
  *
  *
  */
-
 final class Collection {
 
 	/**

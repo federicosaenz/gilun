@@ -2,7 +2,6 @@
 /**
  * Interface para managers de contenido
  */
-
 interface IModule {
 
 	const CONFIG_FILE = "config.json";

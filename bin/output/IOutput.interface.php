@@ -7,7 +7,6 @@
  * @package lib
  * @subpackage output
  */
-
 interface IOutput {
 
 	public function setTpl($src);

@@ -9,7 +9,6 @@
  * @subpackage Handler
  * 
  */
-
 final class Files {
 
 	/**
@@ -29,5 +28,16 @@ final class Files {
 		return $files;
 	}
 
+	/**
+	 * Obtiene el nombre del archivo, dado un path absoluto
+	 * 
+	 * @param string $filepath La ruta absoluta del archivo
+	 * @return string
+	 */
+	public static function extractFilename($filepath) {
+		$last = array_pop(explode("/",$filepath));
+		$parse = parse_url($last);
+		return $parse["path"];
+	}
 }
 ?>

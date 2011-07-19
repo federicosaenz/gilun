@@ -8,7 +8,6 @@
  * @subpackage page
  * 
  */
-
 final class Home extends Module implements IModule {
 
 	/**
@@ -16,15 +15,15 @@ final class Home extends Module implements IModule {
 	 * @return string
 	 */
 	public function getConfigPath() {
-		return dirname(__FILE__).DIRECTORY_SEPARATOR.get_class($this).".config.json";
+		return dirname(__FILE__).DS.get_class($this).".config.json";
 	}
 
 	/**
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-		$this->getOutput()->addChild("idCopado",new Cabecera(Application::getInstance()->output));
-
+		$this->getOutput()->addChild("idCopado",new Cabecera(Application::getInstance()->getOutput()));
+		
 //		echo $this->getOutput()->getEngine()->save();
 //		return array("hola","mundo");
 	}

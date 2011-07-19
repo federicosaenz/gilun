@@ -67,7 +67,7 @@ final class DomHtml implements IOutput{
 	}
 
 	public function write() {
-		echo $this->dom->saveHTML();
+		return $this->dom->saveHTML();
 	}
 
 }
