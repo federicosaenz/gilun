@@ -69,7 +69,6 @@ final class Autoload {
 	 * @return string
 	 */
 	public function getClassPath($className) {
-		
 		$files = Files::rglob($className.".*.php",PATH_SYSTEM);
 		return isset($files[0]) ? $files[0] : null;
 	}
