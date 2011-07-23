@@ -10,6 +10,10 @@
  */
 final class Mysql extends mysqli implements IConnection {
 
+	private $lastQuery = null;
+
+	private $link;
+	
 	public function __construct($host, $user, $pass, $db) {
         parent::__construct($host, $user, $pass, $db);
 
