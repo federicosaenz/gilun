@@ -22,7 +22,15 @@ final class Config {
 	 */
 	private static $config;
 
+
+	/**
+	 * Contiene el objeto de configuracion de la conexion a la base de datos
+	 * @var stdClass
+	 */
+	private static $connection;
+
 	const ENVIRONMENT_FILE	= "environment.config.json";
+	const DATABASE_FILE		= "database.json";
 	const CONFIG_FILE		= "config.json";
 
 
@@ -53,7 +61,12 @@ final class Config {
 	 */
 	public static function getJson($file) {
 		if(is_readable($file)) {
-			return json_decode(file_get_contents($file));
+			if($return = json_decode(file_get_contents($file))) {
+				return $return;
+			} else {
+				echo "no leyo el json o el json esta vacio. archivo:$file";
+				#Devolver excepcion de archivo json failed
+			}
 		} else {
 			#Devolver excepcion de que no se encuentra el archivo json
 		}
@@ -90,6 +103,25 @@ final class Config {
 		} else {
 			#Excepcion de que no existe el output
 		}
+	}
+
+	/**
+	 * Configura la conexion a la base de datos
+	 * @return stdClass
+	 */
+	public function connection() {
+		if(!self::$connection) {
+			if(self::$env) {
+				$dbFile = PATH_CONFIG.self::$env->name.DS.self::DATABASE_FILE;
+			}
+			self::$connection = self::getJson($dbFile);
+			
+			if(!is_array(self::$connection->connections)) {
+				#Excepcion de que no existen conexiones a la BD
+			}
+		}
+
+		return self::$connection;
 	}
 }
 ?>

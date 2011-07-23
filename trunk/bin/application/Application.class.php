@@ -92,6 +92,7 @@ final class Application extends Singleton {
 			if($cache = Cache::read()) {
 				echo $cache;
 			} else {
+				Connection::getInstance();
 				if(method_exists($manager, $accion) ) {
 					$manager->$accion();
 					$content = $manager->getOutput()->write();
