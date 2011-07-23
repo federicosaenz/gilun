@@ -1,16 +1,23 @@
 {
-	"databases": [
-		"read" : {
-			"host"	: "localhost",
-			"db"	: "guiareceta",
-			"user"	: "root",
-			"pass"	: "fede81fede"
-		},
-		"write" : {
-			"host"	: "localhost",
-			"db"	: "guiareceta",
-			"user"	: "root",
-			"pass"	: "fede81fede"
+	"connections": [
+		{
+			"name": "guiareceta",
+			"driver": "mysql",
+			"read": {
+				"host"	: "localhost",
+				"db"	: "guiareceta",
+				"user"	: "root",
+				"pass"	: "fede81fede",
+				"port"	: "80"
+			},
+
+			"write" : {
+				"host"	: "localhost",
+				"db"	: "guiareceta",
+				"user"	: "root",
+				"pass"	: "fede81fede",
+				"port"	: "80"
+			}
 		}
 	]
 }
