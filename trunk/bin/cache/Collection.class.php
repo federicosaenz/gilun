@@ -36,19 +36,15 @@ final class Collection {
 	 */
 	public function __construct($cacheFile=null) {
 		$this->cachefile = $cacheFile;
-	}
-
-	/**
-	 * Devuelve la coleccion
-	 * @return array
-	 */
-	public function getCollection() {
+		
 		if(is_readable($this->cachefile)) {
 			if(!$this->items) {
-				$this->items = include_once($this->cachefile);
-			} 
+				include_once($this->cachefile);
+				if(isset($c)) {
+					$this->items = $c;
+				}
+			}
 		}
-		return $this->items;
 	}
 
 	/**

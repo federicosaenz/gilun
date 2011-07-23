@@ -26,7 +26,6 @@ final class Boot {
 		self::defineGlobalConstants();
 		
 		Autoload::run();
-//		use bin;
 		Application::getInstance()->run();
 	}
 
