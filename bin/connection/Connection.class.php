@@ -14,10 +14,12 @@ class Connection extends Singleton {
 
 	private $connections;
 
-	private $driver;
-
 	private $actualConnection;
 
+	private $actualType;
+
+	const DEFAULT_TYPE = "read";
+	
 	/**
 	 * Constructor de la clase;
 	 */
@@ -53,6 +55,9 @@ class Connection extends Singleton {
 		if(!$this->actualConnection) {
 			$this->actualConnection = $name;
 		}
+		if(!$this->actualType) {
+			$this->actualType = self::DEFAULT_TYPE;
+		}
 	}
 
 	/**
@@ -64,15 +69,16 @@ class Connection extends Singleton {
 		if($name) {
 			return $this->connections[$name];
 		}
-		return $this->connections[$this->actualConnection];
+		return $this->connections[$this->actualConnection][$this->actualType];
 	}
 
 	/**
 	 * Cambia la conexion a la base de datos
 	 * @param string $name
 	 */
-	public function changeConnection($name) {
+	public function changeConnection($name,$type=self::DEFAULT_TYPE) {
 		$this->actualConnection = $name;
+		$this->actualType		= $type;
 	}
 	
 	/**
@@ -84,13 +90,5 @@ class Connection extends Singleton {
 		parent::$classname = __CLASS__;
 		return parent::getInstance();
     }
-
-	/**
-	 * Getter para driver
-	 * @return Driver
-	 */
-	public function getDriver() {
-		return $this->driver;
-	}
 }
 ?>

@@ -73,7 +73,7 @@ final class Application extends Singleton {
 	 * Corre la aplicacion
 	 */
 	public function run() {
-//		Timer::begin();
+		Timer::begin();
 			
 		#Traigo el objeto de configuracion del entorno
 		$this->env = Config::getEnv();
@@ -92,7 +92,6 @@ final class Application extends Singleton {
 			if($cache = Cache::read()) {
 				echo $cache;
 			} else {
-				Connection::getInstance();
 				if(method_exists($manager, $accion) ) {
 					$manager->$accion();
 					$content = $manager->getOutput()->write();
@@ -105,31 +104,8 @@ final class Application extends Singleton {
 		} else {
 			#EXCEPCION: devolver excepcion de que no existe el manager o el output es invalido
 		}
-		
 
-//		if() {
-//			echo $cache;
-//		} else {
-//			if(class_exists($className = $manager)) {
-//				$manager = new $className($this->output);
-//
-//
-//			} else {
-//
-//			}
-
-
-				
-					#levanto la base de datos
-
-					#Creo la pagina
-					#Levanto la configuracion de la pagina
-					#Le seteo el output
-					#Le seteo el action
-					#Le seteo la data al output
-					#Imprimo el output, y se lo asigno a la cache
-				#
-			#
+		echo Timer::get();
 	}
 }
 ?>
