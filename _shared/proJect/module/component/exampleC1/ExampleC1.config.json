@@ -1,0 +1,25 @@
+{
+	"cache" : {
+		"status"	: "enabled",
+		"expires"	:  3600
+	},
+	"data" : "ExampleC1Data",
+	"output" :  {
+		"html": {
+			"engine" : "DomHtml",
+			"tpl"	 : "module/component/cabecera/tpl/exampleC1.html",
+			"css"	 : [
+				"css/schema/general.css",
+				"css/schema/general2.css"
+			],
+			"js"	 : [
+				"js/schema/general.js",
+				"js/schema/general2.js"
+			]
+		},
+		"xml" : {
+			"engine" : "DomXml",
+			"tpl"	 : "schema/xml/template.xml"
+		}
+	}
+}

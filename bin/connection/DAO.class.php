@@ -8,17 +8,16 @@
  * @subpackage dom
  *
  */
-abstract class MysqlDAO {
+abstract class DAO {
 
+	private $engine;
+	
 	public function __construct() {
-		$this->connection = Connection::getInstance();
+		$this->engine = Connection::getInstance()->getConnection();
 	}
 
 	public function select($query=null) {
-		$query = "SELECT * from receta";
-		pr(Connection::getInstance()->getConnection());
-		
-		return Connection::getInstance()->getConnection()->query($query);
+		return $this->engine->select($query);
 	}
 }
 ?>

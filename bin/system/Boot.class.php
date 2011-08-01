@@ -29,6 +29,8 @@ final class Boot {
 		Application::getInstance()->run();
 	}
 
+	
+
 	/**
 	 * Ejecuta los includes necesarios del inicio
 	 * @return void
@@ -52,6 +54,7 @@ final class Boot {
 	 */
 	public static function defineGlobalConstants() {
 		Constant::register("PATH_SYSTEM"		, dirname(__FILE__).DS."..".DS."..".DS);
+		Constant::register("PATH_SYSTEM_SHARED"	, PATH_SYSTEM."_shared".DS);
 		Constant::register("PATH_SYSTEM_BIN"	, PATH_SYSTEM."bin".DS);
 		Constant::register("PATH_SYSTEM_LIB"	, PATH_SYSTEM."lib".DS);
 		Constant::register("PATH_HANDLER"		, PATH_SYSTEM_LIB."handler".DS);
@@ -70,6 +73,16 @@ final class Boot {
 	 */
 	public static function setDirPath($dirpath) {
 		self::$dirpath = $dirpath;
+	}
+
+	/**
+	 * Levanta las constantes generales, y el Autoload. No levanta el Application
+	 */
+	public static function runAutoload() {
+		self::includeGlobalFiles();
+		self::defineGlobalConstants();
+
+		Autoload::run();
 	}
 }
 
