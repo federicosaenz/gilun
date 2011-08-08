@@ -133,26 +133,60 @@ Modules.prototype.content_I2 = function (oWindow) {
 		dvC2.setAttribute("style","float:left;padding-left:50px;width:380px;");
 		var dv = document.createElement("div");
 		dv.setAttribute("style","text-align:center;width:100%;padding-top:20px;");
-		var txt = document.createElement("input");
-		var label = document.createElement("span");
+
 		var title = document.createElement("div");
 		var text = document.createElement("div");
-		txt.setAttribute("name","proyectName");
-		txt.setAttribute("type","text");
-		txt.setAttribute("style","border:1px solid #444");
-		
-		title.innerHTML = "Configurando la base de datos";
+		title.innerHTML = "Configuraci&oacute;n del entorno de desarrollo";
 		title.setAttribute("style","font-size:22px");
-		text.innerHTML = "Bienvenido al wizard de instalaci&oacute;n de proyectos <b>Gil&uacute;n</b>. Este wizard lo guiar&aacute; durante la instalaci&oacute;n y configuraci&oacute;n de un nuevo proyecto en la carpeta projects.<br/><br/>Para comenzar, introduzca un nombre para su proyecto (sin puntos, espacios, ni barras) y haga click en el bot&oacute;n Siguiente";
+		text.innerHTML = "En este paso, se configurar&aacute;n los dominios para el entorno de desarrollo";
 		text.setAttribute("style","font-size:13px;padding-top:15px;padding-bottom:50px;");
 
-		label.setAttribute("style","font-size:12px;");
-		label.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre del proyecto: ";
+		var tble = document.createElement("table");
+		var labelDomain = document.createElement("td");
+		var ctnTxtDomain = document.createElement("td");
+		var txtDomain = document.createElement("input");
+		var dvDomain =  document.createElement("tr");
+		labelDomain.setAttribute("style","font-size:12px;float:left;");
+		labelDomain.innerHTML = "Dominio:";
+		txtDomain.setAttribute("dev_domain","dev.proyectName.com");
+		txtDomain.setAttribute("type","text");
+		txtDomain.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
+		ctnTxtDomain.appendChild(txtDomain);
+		dvDomain.appendChild(labelDomain);
+		dvDomain.appendChild(ctnTxtDomain);
+		tble.appendChild(dvDomain);
+
+		var labelUser = document.createElement("td");
+		var ctnTxtUser = document.createElement("td");
+		var txtUser = document.createElement("input");
+		var dvUser =  document.createElement("tr");
+		labelUser.setAttribute("style","font-size:12px;float:left;");
+		labelUser.innerHTML = "Usuario:";
+		txtUser.setAttribute("dev_user","");
+		txtUser.setAttribute("type","text");
+		txtUser.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
+		ctnTxtUser.appendChild(txtUser);
+		dvUser.appendChild(labelUser);
+		dvUser.appendChild(txtUser);
+		tble.appendChild(dvUser);
+
+		var labelPass = document.createElement("td");
+		var ctnTxtPass = document.createElement("td");
+		var txtPass = document.createElement("input");
+		var dvPass =  document.createElement("tr");
+		labelPass.setAttribute("style","font-size:12px;float:left;");
+		labelPass.innerHTML = "Contrase&ntilde;a:";
+		txtPass.setAttribute("dev_pass","");
+		txtPass.setAttribute("type","text");
+		txtPass.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
+		ctnTxtPass.appendChild(txtPass);
+		dvPass.appendChild(labelPass);
+		dvPass.appendChild(txtPass);
+		tble.appendChild(dvPass);
 
 		dvC2.appendChild(title);
 		dvC2.appendChild(text);
-		dvC2.appendChild(label);
-		dvC2.appendChild(txt);
+		dvC2.appendChild(tble);
 
 	var dvClearBoth = document.createElement("div");
 		dvClearBoth.setAttribute("style","clear:both");
