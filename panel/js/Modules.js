@@ -2,6 +2,9 @@ var Modules = function () {
 	this.wizard = null;
 	this.contentW1 = null;
 	this.contentW2 = null;
+	this.project = {
+		name : null
+	};
 };
 
 Modules.prototype.configWindow = function () {
@@ -54,6 +57,8 @@ Modules.prototype.install_step1 = function () {
 };
 
 Modules.prototype.install_step2 = function () {
+	this.project.name = $("idProjectName").value;
+
 	this.wizard.removeComponent(this.contentW1,"install_wizard1");
 	this.contentW2 = this.content_I2();
 	this.wizard.addComponent(this.contentW2,"install_wizard2");
@@ -80,10 +85,11 @@ Modules.prototype.content_I1 = function (oWindow) {
 		var label = document.createElement("span");
 		var title = document.createElement("div");
 		var text = document.createElement("div");
-		txt.setAttribute("name","proyectName");
+		txt.setAttribute("name"	,"projectName");
+		txt.setAttribute("id"	,"idProjectName");
 		txt.setAttribute("type","text");
 		txt.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;");
-		txt.setAttribute("value","proyecto1");
+		txt.setAttribute("value",this.project.name ? this.project.name : "proyecto1");
 		title.innerHTML = "Instalando un nuevo proyecto";
 		title.setAttribute("style","font-size:22px");
 		text.innerHTML = "Bienvenido al wizard de instalaci&oacute;n de proyectos <b>Gil&uacute;n</b>. Este wizard lo guiar&aacute; durante la instalaci&oacute;n y configuraci&oacute;n de un nuevo proyecto en la carpeta projects.<br/><br/>Para comenzar, introduzca un nombre para su proyecto (sin puntos, espacios, ni barras) y haga click en el bot&oacute;n Siguiente";
@@ -122,6 +128,7 @@ Modules.prototype.content_I1 = function (oWindow) {
 };
 
 Modules.prototype.content_I2 = function (oWindow) {
+	
 	var dvC1 = document.createElement("div");
 		var img = document.createElement("img");
 		img.setAttribute("src","panel/images/iw2.jpg");
@@ -148,7 +155,8 @@ Modules.prototype.content_I2 = function (oWindow) {
 		var dvDomain =  document.createElement("tr");
 		labelDomain.setAttribute("style","font-size:12px;float:left;");
 		labelDomain.innerHTML = "Dominio:";
-		txtDomain.setAttribute("dev_domain","dev.proyectName.com");
+		txtDomain.setAttribute("name","dev_domain");
+		txtDomain.setAttribute("value","dev."+this.project.name+".com");
 		txtDomain.setAttribute("type","text");
 		txtDomain.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
 		ctnTxtDomain.appendChild(txtDomain);
@@ -162,7 +170,8 @@ Modules.prototype.content_I2 = function (oWindow) {
 		var dvUser =  document.createElement("tr");
 		labelUser.setAttribute("style","font-size:12px;float:left;");
 		labelUser.innerHTML = "Usuario:";
-		txtUser.setAttribute("dev_user","");
+		txtUser.setAttribute("name","dev_user");
+		txtUser.setAttribute("value","");
 		txtUser.setAttribute("type","text");
 		txtUser.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
 		ctnTxtUser.appendChild(txtUser);
@@ -176,7 +185,8 @@ Modules.prototype.content_I2 = function (oWindow) {
 		var dvPass =  document.createElement("tr");
 		labelPass.setAttribute("style","font-size:12px;float:left;");
 		labelPass.innerHTML = "Contrase&ntilde;a:";
-		txtPass.setAttribute("dev_pass","");
+		txtPass.setAttribute("name","dev_pass");
+		txtPass.setAttribute("value","");
 		txtPass.setAttribute("type","text");
 		txtPass.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
 		ctnTxtPass.appendChild(txtPass);
