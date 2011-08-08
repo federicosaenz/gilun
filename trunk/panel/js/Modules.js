@@ -57,9 +57,13 @@ Modules.prototype.install_step1 = function () {
 };
 
 Modules.prototype.install_step2 = function () {
-	this.project.name = $("idProjectName").value;
+	if($("idProjectName")!=null) {
+		this.project.name = $("idProjectName").value;
+	}
 
 	this.wizard.removeComponent(this.contentW1,"install_wizard1");
+	this.wizard.removeComponent(this.contentW3,"install_wizard3");
+	
 	this.contentW2 = this.content_I2();
 	this.wizard.addComponent(this.contentW2,"install_wizard2");
 
@@ -67,6 +71,12 @@ Modules.prototype.install_step2 = function () {
 //	strPostData = "panel/modules/installer.php";
 //	var Request = new Ajax("GET");
 //	Request.create(strPostData, this.endInstall.scope(this));
+};
+
+Modules.prototype.install_step3 = function () {
+	this.wizard.removeComponent(this.contentW2,"install_wizard2");
+	this.contentW3 = this.content_I3();
+	this.wizard.addComponent(this.contentW3,"install_wizard3");
 };
 
 Modules.prototype.content_I1 = function (oWindow) {
@@ -222,7 +232,102 @@ Modules.prototype.content_I2 = function (oWindow) {
 	return dv;
 };
 
-Modules.prototype.install_step3 = function () {};
+Modules.prototype.content_I3 = function (oWindow) {
+
+	var dvC1 = document.createElement("div");
+		var img = document.createElement("img");
+		img.setAttribute("src","panel/images/iw3.jpg");
+		img.setAttribute("style","width:250px;height:400px;animation:suavizado 0.4s 1;-moz-animation:suavizado 0.4s 1;-webkit-animation:suavizado 0.4s 1;");
+		dvC1.setAttribute("style","float:left");
+		dvC1.appendChild(img);
+
+	var dvC2 = document.createElement("div");
+		dvC2.setAttribute("style","float:left;padding-left:50px;width:380px;");
+		var dv = document.createElement("div");
+		dv.setAttribute("style","text-align:center;width:100%;padding-top:20px;");
+
+		var title = document.createElement("div");
+		var text = document.createElement("div");
+		title.innerHTML = "Configuraci&oacute;n del entorno de desarrollo";
+		title.setAttribute("style","font-size:22px");
+		text.innerHTML = "En este paso, se configurar&aacute;n los dominios para el entorno de desarrollo";
+		text.setAttribute("style","font-size:13px;padding-top:15px;padding-bottom:50px;");
+
+		var tble = document.createElement("table");
+		var labelDomain = document.createElement("td");
+		var ctnTxtDomain = document.createElement("td");
+		var txtDomain = document.createElement("input");
+		var dvDomain =  document.createElement("tr");
+		labelDomain.setAttribute("style","font-size:12px;float:left;");
+		labelDomain.innerHTML = "Dominio:";
+		txtDomain.setAttribute("name","dev_domain");
+		txtDomain.setAttribute("value","dev."+this.project.name+".com");
+		txtDomain.setAttribute("type","text");
+		txtDomain.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
+		ctnTxtDomain.appendChild(txtDomain);
+		dvDomain.appendChild(labelDomain);
+		dvDomain.appendChild(ctnTxtDomain);
+		tble.appendChild(dvDomain);
+
+		var labelUser = document.createElement("td");
+		var ctnTxtUser = document.createElement("td");
+		var txtUser = document.createElement("input");
+		var dvUser =  document.createElement("tr");
+		labelUser.setAttribute("style","font-size:12px;float:left;");
+		labelUser.innerHTML = "Usuario:";
+		txtUser.setAttribute("name","dev_user");
+		txtUser.setAttribute("value","");
+		txtUser.setAttribute("type","text");
+		txtUser.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
+		ctnTxtUser.appendChild(txtUser);
+		dvUser.appendChild(labelUser);
+		dvUser.appendChild(txtUser);
+		tble.appendChild(dvUser);
+
+		var labelPass = document.createElement("td");
+		var ctnTxtPass = document.createElement("td");
+		var txtPass = document.createElement("input");
+		var dvPass =  document.createElement("tr");
+		labelPass.setAttribute("style","font-size:12px;float:left;");
+		labelPass.innerHTML = "Contrase&ntilde;a:";
+		txtPass.setAttribute("name","dev_pass");
+		txtPass.setAttribute("value","");
+		txtPass.setAttribute("type","text");
+		txtPass.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
+		ctnTxtPass.appendChild(txtPass);
+		dvPass.appendChild(labelPass);
+		dvPass.appendChild(txtPass);
+		tble.appendChild(dvPass);
+
+		dvC2.appendChild(title);
+		dvC2.appendChild(text);
+		dvC2.appendChild(tble);
+
+	var dvClearBoth = document.createElement("div");
+		dvClearBoth.setAttribute("style","clear:both");
+
+	var dvContent = document.createElement("div");
+		dvContent.appendChild(dvC1);
+		dvContent.appendChild(dvC2);
+		dvContent.appendChild(dvClearBoth);
+
+	dv.appendChild(dvContent);
+
+	var botonera = document.createElement("div");
+	var spacer	= document.createElement("span");
+	spacer.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;";
+	botonera.setAttribute("style","width:100%;text-align:right;padding-top:10px");
+	botonera.appendChild(this.buttonPrev(this.install_step2.scope(this)));
+	botonera.appendChild(this.buttonNext(null));
+	botonera.appendChild(spacer);
+	botonera.appendChild(this.buttonClose(oWindow));
+	dv.appendChild(botonera);
+
+	dv.setAttribute("style","padding:20px;");
+	return dv;
+};
+
+
 
 Modules.prototype.buttonClose = function () {
 	var button = document.createElement("input");
