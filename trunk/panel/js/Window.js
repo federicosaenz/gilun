@@ -97,6 +97,8 @@ Window.prototype.removeComponent = function (component,name) {
 
 Window.prototype.setContent = function (content) {
 	this.content.innerHTML = content;
+	this.locateWindow();
+	
 };
 
 Window.prototype.buildWindow = function () {
