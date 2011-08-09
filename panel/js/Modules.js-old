@@ -46,31 +46,26 @@ Modules.prototype.openInstallWizard = function () {
 };
 
 Modules.prototype.install_step1 = function () {
-	this.wizard.removeComponent(this.contentW2,"install_wizard2");
-	this.contentW1 = this.content_I1();
-	this.wizard.addComponent(this.contentW1,"install_wizard1");
-	
+	strPostData = "panel/modules/install_step1.php";
+	var Request = new Ajax("GET");
+	Request.create(strPostData, this.endInstall_step1.scope(this));
+};
 
-//	strPostData = "panel/modules/installer.php";
-//	var Request = new Ajax("GET");
-//	Request.create(strPostData, this.endInstall.scope(this));
+Modules.prototype.endInstall_step1 = function (response) {
+	this.wizard.setContent(response);
+	$("idButtonPrev").setAttribute("disabled","disabled");
+	Tools.Event.attach($("idButtonNext"), "onclick", this.install_step2.scope(this) );
+	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
 };
 
 Modules.prototype.install_step2 = function () {
-	if($("idProjectName")!=null) {
-		this.project.name = $("idProjectName").value;
-	}
+	strPostData = "panel/modules/install_step2.php";
+	var Request = new Ajax("GET");
+	Request.create(strPostData, this.endInstall_step2.scope(this));
+};
 
-	this.wizard.removeComponent(this.contentW1,"install_wizard1");
-	this.wizard.removeComponent(this.contentW3,"install_wizard3");
-	
-	this.contentW2 = this.content_I2();
-	this.wizard.addComponent(this.contentW2,"install_wizard2");
+Modules.prototype.endInstall_step2 = function () {
 
-
-//	strPostData = "panel/modules/installer.php";
-//	var Request = new Ajax("GET");
-//	Request.create(strPostData, this.endInstall.scope(this));
 };
 
 Modules.prototype.install_step3 = function () {
@@ -79,66 +74,7 @@ Modules.prototype.install_step3 = function () {
 	this.wizard.addComponent(this.contentW3,"install_wizard3");
 };
 
-Modules.prototype.content_I1 = function (oWindow) {
-	var dvC1 = document.createElement("div");
-		var img = document.createElement("img");
-		img.setAttribute("src","panel/images/iw1.jpg");
-		img.setAttribute("style","width:250px;height:400px;animation:suavizado 0.4s 1;-moz-animation:suavizado 0.4s 1;-webkit-animation:suavizado 0.4s 1;");
-		dvC1.setAttribute("style","float:left");
-		dvC1.appendChild(img);
-
-	var dvC2 = document.createElement("div");
-		dvC2.setAttribute("style","float:left;padding-left:50px;width:380px;");
-		var dv = document.createElement("div");
-		dv.setAttribute("style","text-align:center;width:100%;padding-top:20px;");
-		var txt = document.createElement("input");
-		var label = document.createElement("span");
-		var title = document.createElement("div");
-		var text = document.createElement("div");
-		txt.setAttribute("name"	,"projectName");
-		txt.setAttribute("id"	,"idProjectName");
-		txt.setAttribute("type","text");
-		txt.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;");
-		txt.setAttribute("value",this.project.name ? this.project.name : "proyecto1");
-		title.innerHTML = "Instalando un nuevo proyecto";
-		title.setAttribute("style","font-size:22px");
-		text.innerHTML = "Bienvenido al wizard de instalaci&oacute;n de proyectos <b>Gil&uacute;n</b>. Este wizard lo guiar&aacute; durante la instalaci&oacute;n y configuraci&oacute;n de un nuevo proyecto en la carpeta projects.<br/><br/>Para comenzar, introduzca un nombre para su proyecto (sin puntos, espacios, ni barras) y haga click en el bot&oacute;n Siguiente";
-		text.setAttribute("style","font-size:13px;padding-top:15px;padding-bottom:50px;");
-
-		label.setAttribute("style","font-size:12px;");
-		label.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre del proyecto: ";
-
-		dvC2.appendChild(title);
-		dvC2.appendChild(text);
-		dvC2.appendChild(label);
-		dvC2.appendChild(txt);
-
-	var dvClearBoth = document.createElement("div");
-		dvClearBoth.setAttribute("style","clear:both");
-
-	var dvContent = document.createElement("div");
-		dvContent.appendChild(dvC1);
-		dvContent.appendChild(dvC2);
-		dvContent.appendChild(dvClearBoth);
-
-	dv.appendChild(dvContent);
-
-	var botonera = document.createElement("div");
-	var spacer	= document.createElement("span");
-	spacer.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;";
-	botonera.setAttribute("style","width:100%;text-align:right;padding-top:10px");
-	botonera.appendChild(this.buttonPrev(null));
-	botonera.appendChild(this.buttonNext(this.install_step2.scope(this)));
-	botonera.appendChild(spacer);
-	botonera.appendChild(this.buttonClose(oWindow));
-	dv.appendChild(botonera);
-
-	dv.setAttribute("style","padding:20px;");
-	return dv;
-};
-
 Modules.prototype.content_I2 = function (oWindow) {
-	
 	var dvC1 = document.createElement("div");
 		var img = document.createElement("img");
 		img.setAttribute("src","panel/images/iw2.jpg");
@@ -155,8 +91,8 @@ Modules.prototype.content_I2 = function (oWindow) {
 		var text = document.createElement("div");
 		title.innerHTML = "Configuraci&oacute;n del entorno de desarrollo";
 		title.setAttribute("style","font-size:22px");
-		text.innerHTML = "En este paso, se configurar&aacute;n los dominios para el entorno de desarrollo";
-		text.setAttribute("style","font-size:13px;padding-top:15px;padding-bottom:50px;");
+		text.innerHTML = "Ingrese los valores para la configuraci&oacute;n de <b>dominio</b>";
+		text.setAttribute("style","font-size:13px;padding-top:15px;padding-bottom:20px;");
 
 		var tble = document.createElement("table");
 		var labelDomain = document.createElement("td");
@@ -207,6 +143,68 @@ Modules.prototype.content_I2 = function (oWindow) {
 		dvC2.appendChild(title);
 		dvC2.appendChild(text);
 		dvC2.appendChild(tble);
+		dvC2.appendChild(document.createElement("hr"));
+
+		var text = document.createElement("div");
+		text.innerHTML = "Ingrese los valores para la configuraci&oacute;n de <b>base de datos</b>";
+		text.setAttribute("style","font-size:13px;padding-top:15px;padding-bottom:20px;");
+
+		var tble = document.createElement("table");
+		var labelDriver = document.createElement("td");
+		var ctnTxtDriver = document.createElement("td");
+		var txtDriver = document.createElement("select");
+		var dvDriver =  document.createElement("tr");
+		labelDriver.setAttribute("style","font-size:12px;float:left;");
+		labelDriver.innerHTML = "Driver:";
+		txtDriver.setAttribute("name","dev_dbdriver");
+		var opt = document.createElement("option");
+		opt.setAttribute("name","MySql");
+		opt.innerHTML = "Mysql";
+		txtDriver.appendChild(opt);
+		txtDriver.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:250px;");
+		ctnTxtDriver.appendChild(txtDriver);
+		dvDriver.appendChild(labelDriver);
+		dvDriver.appendChild(ctnTxtDriver);
+		tble.appendChild(dvDriver);
+
+		dvC2.appendChild(text);
+		dvC2.appendChild(tble);
+
+		var izqTitle = document.createElement("td");
+			izqTitle.innerHTML = "Read";
+		var derTitle = document.createElement("td");
+			derTitle.innerHTML = "Write";
+		var dbSettingsTitle = document.createElement("tr");
+			dbSettingsTitle.appendChild(izqTitle);
+			dbSettingsTitle.appendChild(derTitle);
+		tble.appendChild(dbSettingsTitle);
+
+		var dbSettings = document.createElement("tr");
+			tble.appendChild(dbSettings);
+		var izq = document.createElement("td");
+		var der = document.createElement("td");
+			dbSettings.appendChild(izq);
+			dbSettings.appendChild(der);
+
+		var TablaRead = document.createElement("table");
+		var trRead = document.createElement("tr");
+			TablaRead.appendChild(trRead);
+			izq.appendChild(TablaRead);
+
+
+		var labelRead_host = document.createElement("td");
+		var ctnRead_host = document.createElement("td");
+			labelRead_host.innerHTML = "Host:";
+		var txtRead_host = document.createElement("input");
+			txtRead_host.setAttribute("name","dev_dbread_host");
+			txtRead_host.setAttribute("value","localhost");
+			txtRead_host.setAttribute("type","text");
+			txtRead_host.setAttribute("style","border:1px solid #444;color:#444;font-style:italic;width:150px;");
+			ctnRead_host.appendChild(txtRead_host);
+
+			trRead.appendChild(labelRead_host);
+			trRead.appendChild(ctnRead_host);
+
 
 	var dvClearBoth = document.createElement("div");
 		dvClearBoth.setAttribute("style","clear:both");
@@ -248,7 +246,7 @@ Modules.prototype.content_I3 = function (oWindow) {
 
 		var title = document.createElement("div");
 		var text = document.createElement("div");
-		title.innerHTML = "Configuraci&oacute;n del entorno de desarrollo";
+		title.innerHTML = "Configuraci&oacute;n de la base de datos para desarrollo";
 		title.setAttribute("style","font-size:22px");
 		text.innerHTML = "En este paso, se configurar&aacute;n los dominios para el entorno de desarrollo";
 		text.setAttribute("style","font-size:13px;padding-top:15px;padding-bottom:50px;");
@@ -334,7 +332,7 @@ Modules.prototype.buttonClose = function () {
 	button.setAttribute("type","button");
 	button.setAttribute("value","Cerrar");
 	button.setAttribute("class","btn");
-	
+
 	Tools.Event.attach(button, "onclick", this.wizard.close.scope(this.wizard) );
 	return button;
 };

@@ -9,7 +9,7 @@ class windowButton {
 	private $action = "";
 	private $img = "";
 	private $text = "";
-
+	private $id = "";
 	
 	public function __construct() {
 
@@ -27,12 +27,22 @@ class windowButton {
 		$this->text = $text;
 	}
 
-	public function get() {
+	public function setId($id) {
+		$this->id = $id;
+	}
+
+	public function getDiv() {
+		$id = $this->id? "id='".$this->id."'" : "";
 		return
-		"<div class='winButton' onclick=".$this->action.">
+		"<div class='winButton' onclick=".$this->action." $id>
 			<img src='panel/images/".$this->img."' alt='".$this->text."' />
 			<span>".$this->text."</span>
 		</div>";
+	}
+
+	public function getButton() {
+		$id = $this->id? "id='".$this->id."'" : "";
+		return "<input $id type='button' value='".$this->text."' class='btn' />";
 	}
 }
 ?>
