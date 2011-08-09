@@ -64,8 +64,8 @@ Modules.prototype.install_step2 = function () {
 	Request.create(strPostData, this.endInstall_step2.scope(this));
 };
 
-Modules.prototype.endInstall_step2 = function () {
-
+Modules.prototype.endInstall_step2 = function (response) {
+	this.wizard.setContent(response);
 };
 
 Modules.prototype.install_step3 = function () {

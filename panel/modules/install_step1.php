@@ -36,10 +36,3 @@ $proyectName = "proyecto1";
 		<? echo $ButtonClose->getButton() ?>
 	</div>
 </div>
-
-
-
-
-
-
-
