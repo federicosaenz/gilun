@@ -24,7 +24,7 @@ $configureProd	= isset($_GET["configureProd"])	&& $_GET["configureProd"]=="true"
 			<img src="panel/images/iw1.jpg" style="width:250px;height:400px;animation:suavizado 0.4s 1;-moz-animation:suavizado 0.4s 1;-webkit-animation:suavizado 0.4s 1;" alt="" />
 		</div>
 		<div style="float:left;padding-left:50px;width:380px;">
-			<div style="font-size:22px">Instalando un nuevo proyecto</div>
+			<div style="font-size:20px">Instalando un nuevo proyecto</div>
 			<div style="font-size:13px;padding-top:15px;padding-bottom:10px;">Bienvenido al wizard de instalaci&oacute;n de proyectos <b>Gil&uacute;n</b>. Este wizard lo guiar&aacute; durante la instalaci&oacute;n y configuraci&oacute;n de un nuevo proyecto en la carpeta projects.<br/><br/>Introduzca un nombre para su proyecto (sin puntos, espacios, ni barras) </div>
 			<span style="font-size:12px;">Nombre del proyecto: </span>
 			<input type="text" name="proyectName" id="idProyectName" style="border:1px solid #444;color:#444;font-style:italic;" value="<? echo $proyectName?>" />

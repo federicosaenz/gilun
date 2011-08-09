@@ -43,7 +43,7 @@ switch($env) {
 		$nameEnvironment	= "test";
 	break;
 	case "prod":
-		$imagesrc			= "panel/images/iw3.jpg";
+		$imagesrc			= "panel/images/iw4.jpg";
 		$nameEnvironment	= "producci&oacute;n";
 	break;
 }
@@ -55,7 +55,7 @@ switch($env) {
 			<img src="<? echo $imagesrc?>" style="width:250px;height:400px;animation:suavizado 0.4s 1;-moz-animation:suavizado 0.4s 1;-webkit-animation:suavizado 0.4s 1;" alt="" />
 		</div>
 		<div style="float:left;padding-left:50px;width:380px;">
-			<div style="font-size:22px">Configuraci&oacute;n del entorno de <?echo $nameEnvironment?></div>
+			<div style="font-size:20px">Configuraci&oacute;n del entorno de <?echo $nameEnvironment?></div>
 			<div style="font-size:13px;padding-top:15px;padding-bottom:10px;">Ingrese los valores para la configuraci&oacute;n de <b>dominio</b></div>
 			<table border="0" style="font-size:12px">
 				<tr>
