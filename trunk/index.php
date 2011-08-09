@@ -36,8 +36,8 @@ $ButtonVHost->setText("Descargar los virtual hosts");
 				
 					<div class="winContainer">
 						<div class="winMenu">
-							<? echo $ButtonInstall->get();?>
-							<? echo $ButtonVHost->get();?>
+							<? echo $ButtonInstall->getDiv();?>
+							<? echo $ButtonVHost->getDiv();?>
 						</div>
 						<div class="winConsole" id="winConsole"></div>
 						<div style="clear:both"></div>
