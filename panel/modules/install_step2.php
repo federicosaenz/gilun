@@ -75,7 +75,7 @@ switch($env) {
 			<div style="font-size:13px;padding-bottom:10px;">Ingrese los valores para la configuraci&oacute;n de <b>base de datos</b></div>
 			<div>
 				<span style="font-size:12px">Driver:</span>
-				<select style="border:1px solid #444;color:#444;font-style:italic;width:250px;">
+				<select style="border:1px solid #444;color:#444;font-style:italic;width:250px;" name="<? echo $env?>_dbdriver">
 					<option value="Mysql">Mysql</option>
 					<option value="new">New</option>
 				</select>

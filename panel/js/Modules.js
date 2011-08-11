@@ -8,6 +8,54 @@ var Modules = function () {
 		configureDev:true,
 		configureQa:true,
 		configureProd:true
+		"dev" : {
+			domainName:"",
+			domainUser:"",
+			domainPass:"",
+			db_driver:"",
+			db_read_name:"",
+			db_read_host:"",
+			db_read_user:"",
+			db_read_pass:"",
+			db_read_port:"",
+			db_write_name:"",
+			db_write_host:"",
+			db_write_user:"",
+			db_write_pass:"",
+			db_write_port:""
+		},
+		"qa" : {
+			domainName:"",
+			domainUser:"",
+			domainPass:"",
+			db_driver:"",
+			db_read_name:"",
+			db_read_host:"",
+			db_read_user:"",
+			db_read_pass:"",
+			db_read_port:"",
+			db_write_name:"",
+			db_write_host:"",
+			db_write_user:"",
+			db_write_pass:"",
+			db_write_port:""
+		},
+		"prod" : {
+			domainName:"",
+			domainUser:"",
+			domainPass:"",
+			db_driver:"",
+			db_read_name:"",
+			db_read_host:"",
+			db_read_user:"",
+			db_read_pass:"",
+			db_read_port:"",
+			db_write_name:"",
+			db_write_host:"",
+			db_write_user:"",
+			db_write_pass:"",
+			db_write_port:""
+		}
 	};
 };
 
@@ -62,8 +110,28 @@ Modules.prototype.install_step1 = function () {
 Modules.prototype.endInstall_step1 = function (response) {
 	this.wizard.setContent(response);
 	$("idButtonPrev").setAttribute("disabled","disabled");
-	Tools.Event.attach($("idButtonNext"), "onclick", this.install_step2.scope(this) );
+	Tools.Event.attach($("idButtonNext"), "onclick", this.beginValidate_step1.scope(this) );
 	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
+};
+
+Modules.prototype.beginValidate_step1 = function () {
+	var exp = /^[-_\w]+$/i;
+	if($("idProyectName").value.search(exp)) {
+		alert("El nombre es inválido (debe estar conformado por letras, numeros y/o guiones)");
+	} else {
+		var Request = new Ajax("GET");
+		strPostData = "panel/modules/installer.php?accion=validate1&name="+escape($("idProyectName").value);
+		Request.create(strPostData, this.endValidate_step1.scope(this));
+	}
+};
+
+Modules.prototype.endValidate_step1 = function(response) {
+	eval("var res = "+response);
+	if(res.error=="0") {
+		this.install_step2();
+	} else {
+		alert(res.message);
+	}
 };
 
 Modules.prototype.install_step2 = function () {
@@ -100,6 +168,38 @@ Modules.prototype.endInstall_step2 = function (response) {
 };
 
 Modules.prototype.install_step3 = function (env) {
+	if(env=="qa") {
+		this.project.dev.domainName = $("dev_domainName").value;
+		this.project.dev.domainUser = $("dev_domainUser").value;
+		this.project.dev.domainPass = $("dev_domainPass").value;
+		this.project.dev.db_driver = $("dev_dbdriver").value;
+		this.project.dev.db_read_name= $("dev_dbRead_name").value;
+		this.project.dev.db_read_host= $("dev_dbRead_host").value;
+		this.project.dev.db_read_user= $("dev_dbRead_user").value;
+		this.project.dev.db_read_pass= $("dev_dbRead_pass").value;
+		this.project.dev.db_read_port= $("dev_dbRead_port").value;
+		this.project.dev.db_write_name= $("dev_dbWrite_name").value;
+		this.project.dev.db_write_host= $("dev_dbWrite_host").value;
+		this.project.dev.db_write_user= $("dev_dbWrite_user").value;
+		this.project.dev.db_write_pass= $("dev_dbWrite_pass").value;
+		this.project.dev.db_write_port= $("dev_dbWrite_port").value;
+	} else if(env=="prod") {
+		this.project.qa.domainName = $("qa_domainName").value;
+		this.project.qa.domainUser = $("qa_domainUser").value;
+		this.project.qa.domainPass = $("qa_domainPass").value;
+		this.project.qa.db_driver = $("qa_dbdriver").value;
+		this.project.qa.db_read_name= $("qa_dbRead_name").value;
+		this.project.qa.db_read_host= $("qa_dbRead_host").value;
+		this.project.qa.db_read_user= $("qa_dbRead_user").value;
+		this.project.qa.db_read_pass= $("qa_dbRead_pass").value;
+		this.project.qa.db_read_port= $("qa_dbRead_port").value;
+		this.project.qa.db_write_name= $("qa_dbWrite_name").value;
+		this.project.qa.db_write_host= $("qa_dbWrite_host").value;
+		this.project.qa.db_write_user= $("qa_dbWrite_user").value;
+		this.project.qa.db_write_pass= $("qa_dbWrite_pass").value;
+		this.project.qa.db_write_port= $("qa_dbWrite_port").value;
+	}
+
 	this.env = env;
 	if($("idProyectName")) {
 		this.project.name = $("idProyectName").value;
@@ -139,7 +239,9 @@ Modules.prototype.endInstall_step3 = function (response) {
 };
 
 Modules.prototype.runInstall = function() {
-	alert("comenzando la instalacion");
+
+	//var Request = new Ajax("GET");
+	//Request.create(strPostData, this.endInstall_step1.scope(this));
 };
 
 Modules.prototype.buttonClose = function () {
