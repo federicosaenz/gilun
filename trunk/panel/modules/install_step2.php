@@ -77,7 +77,6 @@ switch($env) {
 				<span style="font-size:12px">Driver:</span>
 				<select style="border:1px solid #444;color:#444;font-style:italic;width:250px;" id="<? echo $env?>_dbdriver" name="<? echo $env?>_dbdriver">
 					<option value="Mysql">Mysql</option>
-					<option value="new">New</option>
 				</select>
 			</div>
 			<br />

@@ -156,20 +156,61 @@ Modules.prototype.install_step2 = function () {
 };
 
 Modules.prototype.endInstall_step2 = function (response) {
-	if(this.project.configureQa) {
-		var next = this.install_step3.scope(this,"qa");
-	} else if(this.project.configureProd) {
-		var next = this.install_step3.scope(this,"prod");
-	} else {
-		var next = this.runInstall.scope(this);
-	}
 	this.wizard.setContent(response);
 	this.fillData(this.env);
+	
+	
 	Tools.Event.attach($("idButtonPrev"), "onclick", this.install_step1.scope(this) );
-	Tools.Event.attach($("idButtonNext"), "onclick", next );
+	Tools.Event.attach($("idButtonNext"), "onclick", this.validateStep.scope(this,"dev"));
 	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
 };
 
+Modules.prototype.validateStep = function(env) {
+	if(!this.hasErrors(env)) {
+		switch(env) {
+			case "dev":
+				if(this.project.configureQa) {
+					this.install_step3("qa");
+				} else if(this.project.configureProd) {
+					this.install_step3("prod");
+				} else {
+					runInstall.scope(this);
+				}
+			break;
+		}
+	}
+};
+
+Modules.prototype.hasErrors = function (env) {
+	var exp = /^[\.\-_\w]+$/i;
+	if($(env+"_domainName").value.search(exp)) {
+		alert("El nombre de dominio es invalido. Debe estar conformado por puntos, guiones letras y/o numeros");
+		return true;
+	}
+	var exp = /^[\-_\w]+$/i;
+	if($(env+"_dbRead_name").value.search(exp)) {
+		alert("El nombre de la base de datos de lectura no puede ser vacio y debe estar conformado por guiones, letras y/o numeros");
+		return true;
+	}
+
+	if($(env+"_dbWrite_name").value.search(exp)) {
+		alert("El nombre de la base de datos de escritura no puede ser vacio y debe estar conformado por guiones, letras y/o numeros");
+		return true;
+	}
+
+	var exp = /^[\.\-_\w]+$/i;
+	if($(env+"_dbRead_host").value.search(exp)) {
+		alert("El nombre de host de lectura no puede ser vacio y debe estar conformado por guiones, letras, puntos y/o numeros");
+		return true;
+	}
+
+	if($(env+"_dbWrite_host").value.search(exp)) {
+		alert("El nombre de host de escritura no puede ser vacio y debe estar conformado por guiones, letras, puntos y/o numeros");
+		return true;
+	}
+
+	return false;
+};
 
 Modules.prototype.install_step3 = function (env) {
 	if(env=="qa") {
