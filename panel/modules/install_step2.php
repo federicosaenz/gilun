@@ -60,22 +60,22 @@ switch($env) {
 			<table border="0" style="font-size:12px">
 				<tr>
 					<td>Dominio:</td>
-					<td><input type="text" name="<? echo $env?>_domainName" value="<?echo $domainName?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
+					<td><input type="text" id="<? echo $env?>_domainName" name="<? echo $env?>_domainName" value="<?echo $domainName?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
 				</tr>
 				<tr>
 					<td>Usuario:</td>
-					<td><input type="text" name="<? echo $env?>_domainUser" value="<?echo $domainUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
+					<td><input type="text" id="<? echo $env?>_domainUser"name="<? echo $env?>_domainUser" value="<?echo $domainUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
 				</tr>
 				<tr>
 					<td>Contrase&ntilde;a:</td>
-					<td><input type="text" name="<? echo $env?>_domainPass" value="<?echo $domainPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
+					<td><input type="text" id="<? echo $env?>_domainPass" name="<? echo $env?>_domainPass" value="<?echo $domainPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
 				</tr>
 			</table>
 			<hr />
 			<div style="font-size:13px;padding-bottom:10px;">Ingrese los valores para la configuraci&oacute;n de <b>base de datos</b></div>
 			<div>
 				<span style="font-size:12px">Driver:</span>
-				<select style="border:1px solid #444;color:#444;font-style:italic;width:250px;" name="<? echo $env?>_dbdriver">
+				<select style="border:1px solid #444;color:#444;font-style:italic;width:250px;" id="<? echo $env?>_dbdriver" name="<? echo $env?>_dbdriver">
 					<option value="Mysql">Mysql</option>
 					<option value="new">New</option>
 				</select>
@@ -88,33 +88,33 @@ switch($env) {
 				</tr>
 				<tr>
 					<td>Nombre:</td>
-					<td><input type="text" name="<? echo $env?>_dbRead_name" value="<?echo $dbReadName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbRead_name" name="<? echo $env?>_dbRead_name" value="<?echo $dbReadName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Nombre:</td>
-					<td><input type="text" name="<? echo $env?>_dbWrite_name" value="<?echo $dbWriteName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbWrite_name" name="<? echo $env?>_dbWrite_name" value="<?echo $dbWriteName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Host:</td>
-					<td><input type="text" name="<? echo $env?>_dbRead_host" value="<?echo $dbReadHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbRead_host" name="<? echo $env?>_dbRead_host" value="<?echo $dbReadHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Host:</td>
-					<td><input type="text" name="<? echo $env?>_dbWrite_host" value="<?echo $dbWriteHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbWrite_host" name="<? echo $env?>_dbWrite_host" value="<?echo $dbWriteHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Usario:</td>
-					<td><input type="text" name="<? echo $env?>_dbRead_user" value="<?echo $dbReadUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbRead_user" name="<? echo $env?>_dbRead_user" value="<?echo $dbReadUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Usario:</td>
-					<td><input type="text" name="<? echo $env?>_dbWrite_user" value="<?echo $dbWriteUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbWrite_user" name="<? echo $env?>_dbWrite_user" value="<?echo $dbWriteUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Contrase&ntilde;a:</td>
-					<td><input type="text" name="<? echo $env?>_dbRead_pass" value="<?echo $dbReadPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbRead_pass" name="<? echo $env?>_dbRead_pass" value="<?echo $dbReadPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Contrase&ntilde;a:</td>
-					<td><input type="text" name="<? echo $env?>_dbWrite_pass" value="<?echo $dbWritePass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbWrite_pass" name="<? echo $env?>_dbWrite_pass" value="<?echo $dbWritePass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Puerto:</td>
-					<td><input type="text" name="<? echo $env?>_dbRead_port" value="<?echo $dbReadPort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbRead_port" name="<? echo $env?>_dbRead_port" value="<?echo $dbReadPort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Puerto:</td>
-					<td><input type="text" name="<? echo $env?>_dbWrite_port" value="<?echo $dbWritePort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<? echo $env?>_dbWrite_port" name="<? echo $env?>_dbWrite_port" value="<?echo $dbWritePort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 			</table>
 		</div>

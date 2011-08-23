@@ -7,7 +7,7 @@ var Modules = function () {
 		name : "",
 		configureDev:true,
 		configureQa:true,
-		configureProd:true
+		configureProd:true,
 		"dev" : {
 			domainName:"",
 			domainUser:"",
@@ -135,6 +135,7 @@ Modules.prototype.endValidate_step1 = function(response) {
 };
 
 Modules.prototype.install_step2 = function () {
+	this.env = "dev";
 	if($("idProyectName")) {
 		this.project.name = $("idProyectName").value;
 	}
@@ -144,6 +145,7 @@ Modules.prototype.install_step2 = function () {
 	if($("idConfigureProd")) {
 		this.project.configureProd = $("idConfigureProd").checked;
 	}
+	
 	strPostData = "panel/modules/install_step2.php?";
 	strPostData += "name="+this.project.name;
 	strPostData += "&configureQa="+this.project.configureQa;
@@ -162,42 +164,18 @@ Modules.prototype.endInstall_step2 = function (response) {
 		var next = this.runInstall.scope(this);
 	}
 	this.wizard.setContent(response);
+	this.fillData(this.env);
 	Tools.Event.attach($("idButtonPrev"), "onclick", this.install_step1.scope(this) );
 	Tools.Event.attach($("idButtonNext"), "onclick", next );
 	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
 };
 
+
 Modules.prototype.install_step3 = function (env) {
 	if(env=="qa") {
-		this.project.dev.domainName = $("dev_domainName").value;
-		this.project.dev.domainUser = $("dev_domainUser").value;
-		this.project.dev.domainPass = $("dev_domainPass").value;
-		this.project.dev.db_driver = $("dev_dbdriver").value;
-		this.project.dev.db_read_name= $("dev_dbRead_name").value;
-		this.project.dev.db_read_host= $("dev_dbRead_host").value;
-		this.project.dev.db_read_user= $("dev_dbRead_user").value;
-		this.project.dev.db_read_pass= $("dev_dbRead_pass").value;
-		this.project.dev.db_read_port= $("dev_dbRead_port").value;
-		this.project.dev.db_write_name= $("dev_dbWrite_name").value;
-		this.project.dev.db_write_host= $("dev_dbWrite_host").value;
-		this.project.dev.db_write_user= $("dev_dbWrite_user").value;
-		this.project.dev.db_write_pass= $("dev_dbWrite_pass").value;
-		this.project.dev.db_write_port= $("dev_dbWrite_port").value;
+		this.hydrate("dev");
 	} else if(env=="prod") {
-		this.project.qa.domainName = $("qa_domainName").value;
-		this.project.qa.domainUser = $("qa_domainUser").value;
-		this.project.qa.domainPass = $("qa_domainPass").value;
-		this.project.qa.db_driver = $("qa_dbdriver").value;
-		this.project.qa.db_read_name= $("qa_dbRead_name").value;
-		this.project.qa.db_read_host= $("qa_dbRead_host").value;
-		this.project.qa.db_read_user= $("qa_dbRead_user").value;
-		this.project.qa.db_read_pass= $("qa_dbRead_pass").value;
-		this.project.qa.db_read_port= $("qa_dbRead_port").value;
-		this.project.qa.db_write_name= $("qa_dbWrite_name").value;
-		this.project.qa.db_write_host= $("qa_dbWrite_host").value;
-		this.project.qa.db_write_user= $("qa_dbWrite_user").value;
-		this.project.qa.db_write_pass= $("qa_dbWrite_pass").value;
-		this.project.qa.db_write_port= $("qa_dbWrite_port").value;
+		this.hydrate("qa");
 	}
 
 	this.env = env;
@@ -220,6 +198,7 @@ Modules.prototype.install_step3 = function (env) {
 	Request.create(strPostData, this.endInstall_step3.scope(this));
 };
 
+
 Modules.prototype.endInstall_step3 = function (response) {
 	if(this.env=="qa" && this.project.configureProd) {
 		var next = this.install_step3.scope(this,"prod");
@@ -231,15 +210,136 @@ Modules.prototype.endInstall_step3 = function (response) {
 		var prev = this.install_step2.scope(this);
 	} else if(this.env=="prod"){
 		var prev = this.install_step3.scope(this,"qa");
-	} 
+	}
 	this.wizard.setContent(response);
+	this.fillData(this.env);
+
 	Tools.Event.attach($("idButtonPrev"), "onclick", prev );
 	Tools.Event.attach($("idButtonNext"), "onclick", next );
 	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
 };
 
-Modules.prototype.runInstall = function() {
+Modules.prototype.fillData = function(env) {
+	switch(env) {
+		case "dev":
+			var from = this.project.dev;
+		break;
+		case "qa":
+			var from = this.project.qa;
+		break;
+		case "prod":
+			var from = this.project.prod;
+		break;
+	}
+	
+	$(env+"_domainName").value = from.domainName ? from.domainName : $(env+"_domainName").value;
+	$(env+"_domainUser").value = from.domainUser ? from.domainUser : $(env+"_domainUser").value;
+	$(env+"_domainPass").value = from.domainPass ? from.domainPass : $(env+"_domainPass").value;
+	$(env+"_dbdriver").value   = from.db_driver ? from.db_driver : $(env+"_dbdriver").value;
+	$(env+"_dbRead_name").value   = from.db_read_name ? from.db_read_name : $(env+"_dbRead_name").value;
+	$(env+"_dbRead_host").value   = from.db_read_host ? from.db_read_host : $(env+"_dbRead_host").value;
+	$(env+"_dbRead_user").value   = from.db_read_user ? from.db_read_user : $(env+"_dbRead_user").value;
+	$(env+"_dbRead_pass").value   = from.db_read_pass ? from.db_read_pass : $(env+"_dbRead_pass").value;
+	$(env+"_dbRead_port").value   = from.db_read_port ? from.db_read_port : $(env+"_dbRead_port").value;
+	$(env+"_dbWrite_name").value   = from.db_write_name ? from.db_write_name : $(env+"_dbWrite_name").value;
+	$(env+"_dbWrite_host").value   = from.db_write_host ? from.db_write_host : $(env+"_dbWrite_host").value;
+	$(env+"_dbWrite_user").value   = from.db_write_user ? from.db_write_user : $(env+"_dbWrite_user").value;
+	$(env+"_dbWrite_pass").value   = from.db_write_pass ? from.db_write_pass : $(env+"_dbWrite_pass").value;
+	$(env+"_dbWrite_port").value   = from.db_write_port ? from.db_write_port : $(env+"_dbWrite_port").value;
+};
 
+Modules.prototype.hydrate = function(env) {
+		switch(env) {
+			case "dev":
+				var from = this.project.dev;
+			break;
+			case "qa":
+				var from = this.project.qa;
+			break;
+			case "prod":
+				var from = this.project.prod;
+			break;
+		}
+
+		var obj = {};
+
+		obj.domainName		= $(env+"_domainName")		? $(env+"_domainName").value	: from.domainName;
+		obj.domainUser		= $(env+"_domainUser")		? $(env+"_domainUser").value	: from.domainUser;
+		obj.domainPass		= $(env+"_domainPass")		? $(env+"_domainPass").value	: from.domainPass;
+		obj.db_driver		= $(env+"_dbdriver")		? $(env+"_dbdriver").value		: from.db_driver;
+		obj.db_read_name	= $(env+"_dbRead_name")		? $(env+"_dbRead_name").value	: from.db_read_name;
+		obj.db_read_host	= $(env+"_dbRead_host")		? $(env+"_dbRead_host").value	: from.db_read_host;
+		obj.db_read_user	= $(env+"_dbRead_user")		? $(env+"_dbRead_user").value	: from.db_read_user;
+		obj.db_read_pass	= $(env+"_dbRead_pass")		? $(env+"_dbRead_pass").value	: from.db_read_pass;
+		obj.db_read_port	= $(env+"_dbRead_port")		? $(env+"_dbRead_port").value	: from.db_read_port;
+		obj.db_write_name	= $(env+"_dbWrite_name")	? $(env+"_dbWrite_name").value	: from.db_write_name;
+		obj.db_write_host	= $(env+"_dbWrite_host")	? $(env+"_dbWrite_host").value	: from.db_write_host;
+		obj.db_write_user	= $(env+"_dbWrite_user")	? $(env+"_dbWrite_user").value	: from.db_write_user;
+		obj.db_write_pass	= $(env+"_dbWrite_pass")	? $(env+"_dbWrite_pass").value	: from.db_write_pass;
+		obj.db_write_port	= $(env+"_dbWrite_port")	? $(env+"_dbWrite_port").value	: from.db_write_port;
+		
+		switch(env) {
+			case "dev":
+				this.project.dev = obj;
+			break;
+			case "qa":
+				this.project.qa = obj;
+			break;
+			case "prod":
+				this.project.prod = obj;
+			break;
+		}
+};
+
+Modules.prototype.runInstall = function() {
+	if(this.project.configureProd) {
+		this.hydrate("prod");
+	}
+
+/*
+	alert(this.project.dev.domainName);
+	alert(this.project.dev.domainPass);
+	alert(this.project.dev.db_driver);
+	alert(this.project.dev.db_read_name);
+	alert(this.project.dev.db_read_host);
+	alert(this.project.dev.db_read_user);
+	alert(this.project.dev.db_read_pass);
+	alert(this.project.dev.db_read_port);
+	alert(this.project.dev.db_write_name);
+	alert(this.project.dev.db_write_host);
+	alert(this.project.dev.db_write_user);
+	alert(this.project.dev.db_write_pass);
+	alert(this.project.dev.db_write_port);
+
+	alert(this.project.qa.domainName);
+	alert(this.project.qa.domainPass);
+	alert(this.project.qa.db_driver);
+	alert(this.project.qa.db_read_name);
+	alert(this.project.qa.db_read_host);
+	alert(this.project.qa.db_read_user);
+	alert(this.project.qa.db_read_pass);
+	alert(this.project.qa.db_read_port);
+	alert(this.project.qa.db_write_name);
+	alert(this.project.qa.db_write_host);
+	alert(this.project.qa.db_write_user);
+	alert(this.project.qa.db_write_pass);
+	alert(this.project.qa.db_write_port);
+
+
+	alert(this.project.prod.domainName);
+	alert(this.project.prod.domainPass);
+	alert(this.project.prod.db_driver);
+	alert(this.project.prod.db_read_name);
+	alert(this.project.prod.db_read_host);
+	alert(this.project.prod.db_read_user);
+	alert(this.project.prod.db_read_pass);
+	alert(this.project.prod.db_read_port);
+	alert(this.project.prod.db_write_name);
+	alert(this.project.prod.db_write_host);
+	alert(this.project.prod.db_write_user);
+	alert(this.project.prod.db_write_pass);
+	alert(this.project.prod.db_write_port);
+*/
 	//var Request = new Ajax("GET");
 	//Request.create(strPostData, this.endInstall_step1.scope(this));
 };
