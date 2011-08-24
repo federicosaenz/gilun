@@ -1,0 +1,4 @@
+{
+	"debug" : @@DEV_DEBUG@@,
+	"cache" : @@DEV_CACHE@@
+}

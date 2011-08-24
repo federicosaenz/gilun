@@ -1,0 +1,23 @@
+{
+	"connections": [
+		{
+			"name": "@@CONN_NAME@@,
+			"driver": "@@CONN_DRIVER@@",
+			"read": {
+				"host"	: "@@CONN_READ_HOST@@",
+				"db"	: "@@CONN_READ_DB@@",
+				"user"	: "@@CONN_READ_USER@@",
+				"pass"	: "@@CONN_READ_PASS@@",
+				"port"	: "@@CONN_READ_PORT@@"
+			},
+
+			"write" : {
+				"host"	: "@@CONN_WRITE_HOST@@",
+				"db"	: "@@CONN_WRITE_DB@@",
+				"user"	: "@@CONN_WRITE_USER@@",
+				"pass"	: "@@CONN_WRITE_PASS@@",
+				"port"	: "@@CONN_WRITE_PORT@@"
+			}
+		}
+	]
+}
