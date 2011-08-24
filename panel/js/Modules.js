@@ -229,7 +229,7 @@ Modules.prototype.install_step3 = function (env) {
 	if($("idConfigureProd")) {
 		this.project.configureProd = $("idConfigureProd").checked;
 	}
-	strPostData = "panel/modules/install_step2.php?";
+	var strPostData = "panel/modules/install_step2.php?";
 	strPostData += "env="+env;
 	strPostData += "&name="+this.project.name;
 	strPostData += "&configureQa="+this.project.configureQa;
@@ -336,53 +336,57 @@ Modules.prototype.runInstall = function() {
 	if(this.project.configureProd) {
 		this.hydrate("prod");
 	}
+	strPostData  = "panel/modules/installer.php?accion=beginInstallation";
+	strPostData	+= "&proyectName="+this.project.name;
 
-/*
-	alert(this.project.dev.domainName);
-	alert(this.project.dev.domainPass);
-	alert(this.project.dev.db_driver);
-	alert(this.project.dev.db_read_name);
-	alert(this.project.dev.db_read_host);
-	alert(this.project.dev.db_read_user);
-	alert(this.project.dev.db_read_pass);
-	alert(this.project.dev.db_read_port);
-	alert(this.project.dev.db_write_name);
-	alert(this.project.dev.db_write_host);
-	alert(this.project.dev.db_write_user);
-	alert(this.project.dev.db_write_pass);
-	alert(this.project.dev.db_write_port);
+	strPostData += "&dev_DomainName="+this.project.dev.domainName;
+	strPostData += "&dev_DomainPass="+this.project.dev.domainPass;
+	strPostData += "&dev_dbDriver="+this.project.dev.db_driver;
+	strPostData += "&dev_db_read_name="+this.project.dev.db_read_name;
+	strPostData += "&dev_db_read_host="+this.project.dev.db_read_host;
+	strPostData += "&dev_db_read_user="+this.project.dev.db_read_user;
+	strPostData += "&dev_db_read_pass="+this.project.dev.db_read_pass;
+	strPostData += "&dev_db_read_port="+this.project.dev.db_read_port;
+	strPostData += "&dev_db_write_name="+this.project.dev.db_write_name;
+	strPostData += "&dev_db_write_host="+this.project.dev.db_write_host;
+	strPostData += "&dev_db_write_user="+this.project.dev.db_write_user;
+	strPostData += "&dev_db_write_pass="+this.project.dev.db_write_pass;
+	strPostData += "&dev_db_write_port="+this.project.dev.db_write_port;
+	
+	strPostData += "&qa_DomainName="+this.project.qa.domainName;
+	strPostData += "&qa_DomainPass="+this.project.qa.domainPass;
+	strPostData += "&qa_dbDriver="+this.project.qa.db_driver;
+	strPostData += "&qa_db_read_name="+this.project.qa.db_read_name;
+	strPostData += "&qa_db_read_host="+this.project.qa.db_read_host;
+	strPostData += "&qa_db_read_user="+this.project.qa.db_read_user;
+	strPostData += "&qa_db_read_pass="+this.project.qa.db_read_pass;
+	strPostData += "&qa_db_read_port="+this.project.qa.db_read_port;
+	strPostData += "&qa_db_write_name="+this.project.qa.db_write_name;
+	strPostData += "&qa_db_write_host="+this.project.qa.db_write_host;
+	strPostData += "&qa_db_write_user="+this.project.qa.db_write_user;
+	strPostData += "&qa_db_write_pass="+this.project.qa.db_write_pass;
+	strPostData += "&qa_db_write_port="+this.project.qa.db_write_port;
 
-	alert(this.project.qa.domainName);
-	alert(this.project.qa.domainPass);
-	alert(this.project.qa.db_driver);
-	alert(this.project.qa.db_read_name);
-	alert(this.project.qa.db_read_host);
-	alert(this.project.qa.db_read_user);
-	alert(this.project.qa.db_read_pass);
-	alert(this.project.qa.db_read_port);
-	alert(this.project.qa.db_write_name);
-	alert(this.project.qa.db_write_host);
-	alert(this.project.qa.db_write_user);
-	alert(this.project.qa.db_write_pass);
-	alert(this.project.qa.db_write_port);
+	strPostData += "&prod_DomainName="+this.project.prod.domainName;
+	strPostData += "&prod_DomainPass="+this.project.prod.domainPass;
+	strPostData += "&prod_dbDriver="+this.project.prod.db_driver;
+	strPostData += "&prod_db_read_name="+this.project.prod.db_read_name;
+	strPostData += "&prod_db_read_host="+this.project.prod.db_read_host;
+	strPostData += "&prod_db_read_user="+this.project.prod.db_read_user;
+	strPostData += "&prod_db_read_pass="+this.project.prod.db_read_pass;
+	strPostData += "&prod_db_read_port="+this.project.prod.db_read_port;
+	strPostData += "&prod_db_write_name="+this.project.prod.db_write_name;
+	strPostData += "&prod_db_write_host="+this.project.prod.db_write_host;
+	strPostData += "&prod_db_write_user="+this.project.prod.db_write_user;
+	strPostData += "&prod_db_write_pass="+this.project.prod.db_write_pass;
+	strPostData += "&prod_db_write_port="+this.project.prod.db_write_port;
 
+	var Request = new Ajax("GET");
+	Request.create(strPostData, this.endInstall.scope(this));
+};
 
-	alert(this.project.prod.domainName);
-	alert(this.project.prod.domainPass);
-	alert(this.project.prod.db_driver);
-	alert(this.project.prod.db_read_name);
-	alert(this.project.prod.db_read_host);
-	alert(this.project.prod.db_read_user);
-	alert(this.project.prod.db_read_pass);
-	alert(this.project.prod.db_read_port);
-	alert(this.project.prod.db_write_name);
-	alert(this.project.prod.db_write_host);
-	alert(this.project.prod.db_write_user);
-	alert(this.project.prod.db_write_pass);
-	alert(this.project.prod.db_write_port);
-*/
-	//var Request = new Ajax("GET");
-	//Request.create(strPostData, this.endInstall_step1.scope(this));
+Modules.prototype.endInstall = function (response) {
+	alert(response);
 };
 
 Modules.prototype.buttonClose = function () {
