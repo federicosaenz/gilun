@@ -1,6 +1,6 @@
 {
 	"cache" : {
-		"status"	: "w",
+		"status"	: "",
 		"expires"	:  3600
 	},
 	"data" : "HomeData",
@@ -20,6 +20,10 @@
 		"xml" : {
 			"engine" : "DomXml",
 			"tpl"	 : "schema/xml/template.xml"
+		},
+		"json" : {
+			"engine" : "Json",
+			"tpl"	 : "schema/xml/template.json"
 		}
 	}
 }

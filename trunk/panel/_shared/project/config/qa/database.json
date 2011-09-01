@@ -1,7 +1,7 @@
 {
 	"connections": [
 		{
-			"name": "@@CONN_NAME@@,
+			"name": "@@CONN_NAME@@",
 			"driver": "@@CONN_DRIVER@@",
 			"read": {
 				"host"	: "@@CONN_READ_HOST@@",
