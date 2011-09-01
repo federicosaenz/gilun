@@ -14,5 +14,11 @@ final class CabeceraData  {
 	public function getDatosCabecera() {
 		return array("acavauno","acavaelotro");
 	}
+
+	public function getH1(){
+		$DatosDAO = new DatosDAO();
+		$DatosDAO->get();
+		
+	}
 }
 ?>
