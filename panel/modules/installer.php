@@ -95,6 +95,8 @@ class InstallerController {
 		self::writeEnvironmentConfig($directory,"dev",$dev);
 		self::writeEnvironmentConfig($directory,"qa",$qa);
 		self::writeEnvironmentConfig($directory,"prod",$prod);
+
+		echo json_encode(array("error"=>"ok"));
 	}
 
 	public static function writeEnvironmentConfig($directory,$env,$data) {

@@ -3,18 +3,18 @@
 		"domain"	: "@@DEV_DOMAIN@@",
 		"user"		: "@@DEV_USER@@",
 		"password"	: "@@DEV_PASS@@",
-		"name"		: "@@DEV_NAME@@"
+		"name"		: "dev"
 	},
 	{
 		"domain"	: "@@QA_DOMAIN@@",
 		"user"		: "@@QA_USER@@",
 		"password"	: "@@QA_PASS@@",
-		"name"		: "@@QA_NAME@@"
+		"name"		: "qa"
 	},
 	{
 		"domain"	: "@@PROD_DOMAIN@@",
 		"user"		: "@@PROD_USER@@",
 		"password"	: "@@PROD_PASS@@",
-		"name"		: "@@PROD_NAME@@"
+		"name"		: "prod"
 	}
 ]

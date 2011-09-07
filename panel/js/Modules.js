@@ -386,7 +386,20 @@ Modules.prototype.runInstall = function() {
 };
 
 Modules.prototype.endInstall = function (response) {
-	alert(response);
+	eval("var response = "+response);
+	if(response["error"]=="ok") {
+		this.writeConsoleNewLine("Se cre&oacute; una nueva carpeta del proyecto projects/"+this.project.name);
+		this.writeConsoleNewLine("Se modific&oacute; el archivo de configuraci&oacute;n de entornos del proyecto projects/"+this.project.name+"/config/environment.config.json");
+		this.writeConsoleNewLine("Se crearon las clases de acceso a datos.");
+		strPostData = "panel/modules/installComplete.php";
+		var Request = new Ajax("GET");
+		Request.create(strPostData, this.installComplete.scope(this));
+	}
+};
+
+Modules.prototype.installComplete = function (response) {
+	this.wizard.setContent(response);
+	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
 };
 
 Modules.prototype.buttonClose = function () {
@@ -425,9 +438,6 @@ Modules.prototype.buttonPrev = function (action) {
 		button.setAttribute("disabled","disabled");
 	}
 	return button;
-};
-
-Modules.prototype.endInstall = function (response) {
 };
 
 Modules.prototype.writeConsoleNewLine = function(text) {
