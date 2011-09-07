@@ -35,9 +35,11 @@ final class Files {
 	 * @return string
 	 */
 	public static function extractFilename($filepath) {
-		$last = array_pop(explode("/",$filepath));
+		$last = array_pop(explode(DIRECTORY_SEPARATOR,$filepath));
 		$parse = parse_url($last);
 		return $parse["path"];
 	}
+
+	
 }
 ?>

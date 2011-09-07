@@ -109,8 +109,8 @@ final class Config {
 	 * Configura la conexion a la base de datos
 	 * @return stdClass
 	 */
-	public function connection() {
-		if(!self::$connection) {
+	public static function connection() {
+	 	if(!self::$connection) {
 			if(self::$env) {
 				$dbFile = PATH_CONFIG.self::$env->name.DS.self::DATABASE_FILE;
 			}

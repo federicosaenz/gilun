@@ -17,7 +17,17 @@ abstract class DAO {
 	}
 
 	public function select($query=null) {
-		return $this->engine->select($query);
+		return $this->engine->select($query,$this);
+	}
+
+	public function escape($value,$type) {
+		if (preg_match("@int@",$type)) {
+			return (int)$value;
+		}
+
+		if (preg_match("@varchar@",$type)) {
+			return $this->engine->escapeString($value);
+		}
 	}
 }
 ?>

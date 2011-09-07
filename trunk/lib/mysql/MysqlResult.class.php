@@ -8,28 +8,18 @@
  * @subpackage dom
  *
  */
-class Recordset {
-
-	private $result;
-
-	public function __construct($result) {
-		$this->result = $result;
-	}
+final class MysqlResult extends mysqli_result {
 
 	public function next() {
-		return $this->result->next();
+		return $this->fetch_object();
 	}
 
 	public function restart() {
-		return $this->result->restart();
+		return $this->data_seek(0);
 	}
 
 	public function isEmpty() {
-		return $this->result->isEmpty();
+		return !$this->num_rows;
 	}
-
-//	public function prev() {
-//		return
-//	}
 }
 ?>

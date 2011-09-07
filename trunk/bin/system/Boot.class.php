@@ -22,8 +22,9 @@ final class Boot {
 	 * @return void;
 	 */
 	public static function run() {
-		self::includeGlobalFiles();
-		self::defineGlobalConstants();
+		self::runAutoload();
+//		self::includeGlobalFiles();
+//		self::defineGlobalConstants();
 		
 		Autoload::run();
 		Application::getInstance()->run();
@@ -62,6 +63,7 @@ final class Boot {
 
 		Constant::register("PATH_PROJECT"		, self::$dirpath.DS);
 		Constant::register("PATH_CONFIG"		, PATH_PROJECT."config".DS);
+		Constant::register("PATH_DATA"			, PATH_PROJECT."data".DS);
 		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT."cache".DS."html".DS);
 		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT."cache".DS."system".DS);
 		
