@@ -69,7 +69,13 @@ final class Autoload {
 	 * @return string
 	 */
 	public function getClassPath($className) {
-		$files = Files::rglob($className.".*.php",PATH_SYSTEM);
+		$files = Files::rglob($className.".*.php",PATH_SYSTEM_BIN);
+		if(!$files) {
+			$files = Files::rglob($className.".*.php",PATH_SYSTEM_LIB);
+		}
+		if(!$files) {
+			$files = Files::rglob($className.".*.php",PATH_PROJECT);
+		}
 		return isset($files[0]) ? $files[0] : null;
 	}
 }

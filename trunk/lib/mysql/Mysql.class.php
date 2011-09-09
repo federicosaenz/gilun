@@ -18,8 +18,6 @@ final class Mysql implements IConnection {
 
 	private $result;
 
-	private $lastQuery;
-	
 	public function __construct($host, $user, $pass, $db) {
 		$this->mysqli = new mysqli($host, $user, $pass, $db);
 //        parent::__construct($host, $user, $pass, $db);
