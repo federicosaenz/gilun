@@ -53,7 +53,8 @@
 			if($dataColumns->Key=="PRI") {
 				$codeDAO .= "\t\t\$this->primaryKey[] = \"".$dataColumns->Field."\";\r\n";
 			}
-			$codeDAO .= "\t\t\$this->properties[\"".$dataColumns->Field."\"] = null;\r\n";
+			$codeDAO .= "\t\t\$this->properties[\"".$dataColumns->Field."\"][\"value\"] = null;\r\n";
+			$codeDAO .= "\t\t\$this->properties[\"".$dataColumns->Field."\"][\"type\"] = \"".$dataColumns->Type."\";\r\n";
 		}
 		$codeDAO .= "\t}";
 
@@ -64,12 +65,13 @@
 			$codeDAO .= "\tpublic function get".ucfirst($dataColumns->Field)."() {\r\n";
 			$codeDAO .= "\t\treturn \$this->properties[\"".$dataColumns->Field."\"][\"value\"];\r\n";
 			$codeDAO .= "\t}\r\n";
-						$codeDAO .= "\r\n";
+			$codeDAO .= "\r\n";
+
 			$codeDAO .= "\tpublic function set".ucfirst($dataColumns->Field)."(\$value,\$escape=true) {\r\n";
 			$codeDAO .= "\t\tif(\$escape) {\r\n";
-			$codeDAO .= "\t\t\t\$this->properties[\"".$dataColumns->Field."\"] = \$this->escape(\$value,\"".$dataColumns->Type."\");\r\n";
+			$codeDAO .= "\t\t\t\$this->properties[\"".$dataColumns->Field."\"][\"value\"] = \$this->escape(\$value,\"".$dataColumns->Type."\");\r\n";
 			$codeDAO .= "\t\t} else {\r\n";
-			$codeDAO .= "\t\t\t\$this->properties[\"".$dataColumns->Field."\"] = \$value;\r\n";
+			$codeDAO .= "\t\t\t\$this->properties[\"".$dataColumns->Field."\"][\"value\"] = \$value;\r\n";
 			$codeDAO .= "\t\t}\r\n";
 			$codeDAO .= "\t}\r\n";
 		}
