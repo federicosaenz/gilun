@@ -53,21 +53,21 @@ final class Mysql implements IConnection {
 			foreach($context->properties as $name=>$value) {
 				if($first) {
 					$fields .= "`".$name."`";
-					if($value) {
+					if($value["value"]) {
 						if($firstValue) {
-							$where .= "WHERE ".$name."='".$value."' ";
+							$where .= "WHERE ".$name."='".$value["value"]."' ";
 							$firstValue = false;
 						}
 					}
 					$first = false;
 				} else {
 					$fields .= ",`".$name."`";
-					if($value) {
+					if($value["value"]) {
 						if($firstValue) {
 							$firstValue = false;
-							$where .= "WHERE ".$name."='".$value."' ";
+							$where .= "WHERE ".$name."='".$value["value"]."' ";
 						} else {
-							$where .= "AND ".$name."='".$value."' ";
+							$where .= "AND ".$name."='".$value["value"]."' ";
 						}
 					} 
 				}
@@ -98,6 +98,42 @@ final class Mysql implements IConnection {
 			foreach($context->properties as $name=>$value) {
 				if($first) {
 					$fields .= "`".$name."`";
+					if($value["value"]) {
+						if($firstValue) {
+							$where .= "WHERE ".$name."='".$value["value"]."' ";
+							$firstValue = false;
+						}
+					}
+					$first = false;
+				} else {
+					$fields .= ",`".$name."`";
+					if($value["value"]) {
+						if($firstValue) {
+							$firstValue = false;
+							$where .= "WHERE ".$name."='".$value["value"]."' ";
+						} else {
+							$where .= "AND ".$name."='".$value["value"]."' ";
+						}
+					} 
+				}
+			}
+			$query = "SELECT $fields FROM ".$context->tableName." $where";
+		}
+		
+		$this->lastQuery = $query;
+		$this->mysqli->real_query($query);
+		$MysqlResult = new MysqlResult($this->mysqli);
+		return $MysqlResult->fetch_object();
+	}
+
+	/**
+	 * Graba un registro en la base de datos. Si esta seteada la primary key, hace un update, caso contrario hace un insert
+	 *
+	 */
+	public function save($query,$insertDate=false,$context=null) {
+		foreach($context->properties as $name=>$value) {
+				if($first) {
+					$fields .= "`".$name."`";
 					if($value) {
 						if($firstValue) {
 							$where .= "WHERE ".$name."='".$value."' ";
@@ -114,19 +150,11 @@ final class Mysql implements IConnection {
 						} else {
 							$where .= "AND ".$name."='".$value."' ";
 						}
-					} 
+					}
 				}
 			}
-			$query = "SELECT $fields FROM ".$context->tableName." $where $aditional";
-		}
-		
-		$this->lastQuery = $query;
-		$this->mysqli->real_query($query);
-		$MysqlResult = new MysqlResult($this->mysqli);
-		return $MysqlResult->fetch_object();
+		$query = "INSERT INTO ".$context->tableName. "VALUES";
 	}
-
-	public function save() {}
 
 	public function delete() {}
 
