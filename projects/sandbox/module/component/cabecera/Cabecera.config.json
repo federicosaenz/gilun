@@ -7,7 +7,7 @@
 	"output" :  {
 		"html": {
 			"engine" : "DomHtml",
-			"tpl"	 : "module/component/cabecera/tpl/cabecera.html",
+			"tpl"	 : "module/component/cabecera/tpl/exampleC1.html",
 			"css"	 : [
 				"css/schema/general.css",
 				"css/schema/general2.css"

@@ -7,7 +7,7 @@
 	"output" :  {
 		"html": {
 			"engine" : "DomHtml",
-			"tpl"	 : "module/page/home/tpl/template.html",
+			"tpl"	 : "module/page/home/tpl/home.html",
 			"css"	 : [
 				"css/schema/general.css",
 				"css/schema/general2.css"
