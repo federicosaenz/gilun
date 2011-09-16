@@ -42,6 +42,14 @@ abstract class DAO {
 		return $this->engine->get($query,$this);
 	}
 
+	public function saveDate($query=null) {
+		return $this->engine->save($query,true,$this);
+	}
+
+	public function save($query=null,$insertDate=false) {
+		return $this->engine->save($query,$insertDate,$this);
+	}
+
 	public function escape($value,$type) {
 		if (preg_match("@int@",$type)) {
 			return (int)$value;
