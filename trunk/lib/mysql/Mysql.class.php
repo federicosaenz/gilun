@@ -39,10 +39,16 @@ final class Mysql implements IConnection {
         }
 	}
 
-	public function query($query) {
+	/**
+	 * Ejecuta un query en la base de datos. Si tiene seteado return, devuelve un MysqlResult.
+	 * @param string $query
+	 * @param boolean $return
+	 * @return MysqlResult
+	 */
+	public function query($query,$return=true) {
 		$this->lastQuery = $query;
 		$this->mysqli->real_query($query);
-		return new MysqlResult($this->mysqli);
+		return $return ? new MysqlResult($this->mysqli) : null;
 	}
 
 	/**
@@ -180,7 +186,10 @@ final class Mysql implements IConnection {
 				}
 			}
 		}
-		echo "INSERT INTO $context->tableName ($fields) VALUES ($values)";
+		if($fields && $values) {
+			$query = "INSERT INTO $context->tableName ($fields) VALUES ($values);";
+			$this->query($query, false);
+		}
 	}
 
 	/**
@@ -213,10 +222,29 @@ final class Mysql implements IConnection {
 				}
 			}
 		}
-		echo "UPDATE $context->tableName SET $set WHERE $where <BR>";
+		if($set && $where) {
+			$query = "UPDATE $context->tableName SET $set WHERE $where";
+			$this->query($query,false);
+		}
 	}
 
-	public function delete() {}
+	public function delete() {
+		$first = true;
+		$where = "";
+		foreach($context->properties as $name=>$value) {
+			if($first) {
+				$first = false;
+				$where .= "`".$name."` = '".$value["value"]."'";
+			} else {
+				$where .= "AND `".$name."` = '".$value["value"]."'";
+			}
+		}
+
+		if($where) {
+			$query = "DELETE FROM $context->tableName WHERE $where";
+		}
+		$this->query($query,false);
+	}
 
 	/**
 	 * Busca N registros en la base de datos con un LIKE, y devuelve un Mysqli_result
