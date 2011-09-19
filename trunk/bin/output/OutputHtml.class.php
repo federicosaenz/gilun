@@ -29,6 +29,8 @@ class OutputHtml extends Output {
 	}
 
 	public function write() {
+//		Css::generate($managerClass);
+//		Js::generate($managerClass);
 		return $this->engine->write();
 	}
 
