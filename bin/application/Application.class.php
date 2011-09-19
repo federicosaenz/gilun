@@ -86,16 +86,20 @@ final class Application extends Singleton {
 		$accion		= Get::getParameter("accion","render");
 
 		if(class_exists($className = $manager)) {
-			$manager = new $className($this->output);
-			Cache::setup($manager->getCache()->status,$manager->getCache()->expires,Server::get("REQUEST_URI"));
+			$managerClass = new $className($this->output);
+			$cacheConf = $managerClass->getCache();
+			Cache::setup($cacheConf->status,$cacheConf->expires,Server::get("REQUEST_URI"));
 			
 			if($cache = Cache::read()) {
 				echo $cache;
 			} else {
-				if(method_exists($manager, $accion) ) {
-					$manager->$accion();
-					$content = $manager->getOutput()->write();
+				if(method_exists($managerClass, $accion) ) {
+					$managerClass->$accion();
+					$content = $managerClass->getOutput()->write();
 					$Mysql = Connection::getInstance()->getConnection();
+					
+//					Js::generate($manager);
+					
 					Cache::write($content);
 					echo $content;
 				} else {
