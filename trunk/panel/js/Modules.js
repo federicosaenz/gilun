@@ -97,6 +97,43 @@ Modules.prototype.openInstallWizard = function () {
 	this.install_step1();
 };
 
+Modules.prototype.openVHostWizard = function () {
+	this.writeConsoleNewLine("Abriendo el wizard de virtualhost");
+	var cnf = this.configWindow();
+	cnf.header.title = "Descargar VirtualHost";
+	this.wizard = new Window(cnf);
+	this.wizard.build();
+	this.vhost_step1();
+};
+
+Modules.prototype.vhost_step1 = function () {
+	strPostData = "panel/modules/vhost_step1.php";
+
+	var Request = new Ajax("GET");
+	Request.create(strPostData, this.endVhost_step1.scope(this));
+};
+
+Modules.prototype.endVhost_step1 = function (response) {
+	this.wizard.setContent(response);
+//	$("idButtonPrev").setAttribute("disabled","disabled");
+	Tools.Event.attach($("idButtonDownload"), "onclick", this.beginDownload.scope(this) );
+	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
+};
+
+Modules.prototype.beginDownload = function() {
+	strPostData = "panel/modules/vhost_step2.php?";
+	strPostData += "project="+$("idProjectName").value;
+	strPostData += "&environment="+$("idEnvironment").value;
+
+	var iframe = $("idOcultedFrm");
+	iframe.src = strPostData;
+};
+
+Modules.prototype.endDownload = function (response) {
+	this.wizard.setContent(response);
+	Tools.Event.attach($("idButtonClose"), "onclick", this.wizard.close.scope(this.wizard) );
+};
+
 Modules.prototype.install_step1 = function () {
 	strPostData = "panel/modules/install_step1.php?";
 	strPostData += "name="+this.project.name;
