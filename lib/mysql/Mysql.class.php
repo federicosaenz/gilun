@@ -22,6 +22,17 @@ final class Mysql implements IConnection {
 	 */
 	private $lastQuery = null;
 
+	/**
+	 * Nombre del host a conectar
+	 * @var string
+	 */
+	private $host = null;
+
+	/**
+	 * Nombre de la base de datos a conectar
+	 * @var string
+	 */
+	private $dbName = null;
 
 	/**
 	 * Constructor de la clase
@@ -31,7 +42,9 @@ final class Mysql implements IConnection {
 	 * @param string $db
 	 */
 	public function __construct($host, $user, $pass, $db) {
-		$this->mysqli = new mysqli($host, $user, $pass, $db);
+		$this->host		= $host;
+		$this->dbName	= $db;
+		$this->mysqli	= new mysqli($host, $user, $pass, $db);
 
         if (mysqli_connect_error()) {
             echo "no se pudo conectar a la base de datos";
@@ -303,6 +316,22 @@ final class Mysql implements IConnection {
 	 */
 	public function getQuery() {
 		return $this->lastQuery;
+	}
+
+	/**
+	 * Getter de Host
+	 * @return string
+	 */
+	public function getHost() {
+		return $this->host;
+	}
+
+	/**
+	 * Getter de dbName
+	 * @return string
+	 */
+	public function getDbName() {
+		return $this->dbName;
 	}
 }
 ?>

@@ -15,6 +15,28 @@ class InstallerController {
 		}
 	}
 
+	public static function chmodr($path, $filemode) {
+		if (!is_dir($path))
+			return chmod($path, $filemode);
+
+		$dh = opendir($path);
+		while (($file = readdir($dh)) !== false) {
+			if($file != '.' && $file != '..') {
+				$fullpath = $path.'/'.$file;
+				if(is_link($fullpath))
+					return FALSE;
+				elseif(!is_dir($fullpath) && !chmod($fullpath, $filemode))
+						return FALSE;
+				elseif(!chmodr($fullpath, $filemode))
+					return FALSE;
+			}
+		}
+
+		closedir($dh);
+
+		return chmod($path, $filemode);
+	}
+
 	public static function run() {
 		$proyectName		= isset($_GET["proyectName"]) ? trim(urldecode($_GET["proyectName"])) : "";
 		
@@ -68,7 +90,11 @@ class InstallerController {
 		if(!file_exists($directory)) {
 			exec("cp -R ".dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."_shared".DIRECTORY_SEPARATOR."project $directory");
 		}
-
+		if($directory) {
+//			$this->chmodr($directory,0775);
+			exec("chmod 775 -R ".$directory);
+		}
+		
 		$configFile = $directory.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."environment.config.json";
 
 		if(is_readable($configFile)) {

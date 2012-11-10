@@ -84,14 +84,14 @@ final class Application extends Singleton {
 		#Parametros globales
 		$manager	= Get::getParameter("manager","Home");
 		$accion		= Get::getParameter("accion","render");
-
+		
 		if(class_exists($className = $manager)) {
 			$managerClass = new $className($this->output);
 			$cacheConf = $managerClass->getCache();
 			Cache::setup($cacheConf->status,$cacheConf->expires,Server::get("REQUEST_URI"));
-			
 			if($cache = Cache::read()) {
 				echo $cache;
+				echo "<!-- FROM CACHE -->";
 			} else {
 				if(method_exists($managerClass, $accion) ) {
 					$managerClass->$accion();
