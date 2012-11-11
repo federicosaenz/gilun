@@ -84,6 +84,7 @@ final class Config {
 			if($cnf->data) {
 				$module->data =  new $cnf->data();
 			}
+			
 			foreach($cnf->output->$type as $property => $value) {
 				switch($property) {
 					case "engine":
