@@ -66,6 +66,7 @@ final class Boot {
 		Constant::register("PATH_DATA"			, PATH_PROJECT."data".DS);
 		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT."cache".DS."html".DS);
 		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT."cache".DS."system".DS);
+		Constant::register("PATH_EXT"			, PATH_PROJECT."ext".DS);
 		
 	}
 

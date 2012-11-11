@@ -98,7 +98,7 @@ final class Application extends Singleton {
 					$content = $managerClass->getOutput()->write();
 					$Mysql = Connection::getInstance()->getConnection();
 					
-//					Js::generate($manager);
+//					Css::generate($managerClass);
 					
 					Cache::write($content);
 					echo $content;

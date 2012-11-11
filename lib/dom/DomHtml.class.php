@@ -20,6 +20,10 @@ final class DomHtml implements IOutput{
 		$this->dom = new DOMDocument("1.0", self::ENCODING);
 	}
 
+	public function getDom() {
+		return $this->dom;
+	}
+	
 	/**
 	 * Levanta el TPL de configuracion
 	 * @param string $src
@@ -53,11 +57,22 @@ final class DomHtml implements IOutput{
 		return $this->dom->getElementsByTagName($tagName);
 	}
 
-	public function addChild($elementId,$child) {
-		$element = $this->dom->getElementById($elementId);
-		$newNode = $this->dom->importNode($child->getContent(),true);
-		if($element) {
-			$element->appendChild($newNode);
+	public function addChild($element,$child) {
+		if(gettype($element)=="string") {
+			$elementNode = $this->dom->getElementById($element);
+		} elseif(gettype($element)=="object" && ($element instanceof DOMElement)) {
+			$elementNode = $element;
+		}
+		if(get_class($child)=="DOMElement") {
+			$newNode = $child;
+//			var_dump(get_class($child));
+		} else {
+			$newNode = $this->dom->importNode($child->getContent(),true);
+		}
+		
+		
+		if($elementNode) {
+			$elementNode->appendChild($newNode);
 		}
 	}
 

@@ -21,20 +21,31 @@ abstract class Module {
 	 * @var stdClass
 	 */
 	protected $cache;
-	
+
+
 	/**
 	 * Constructor de la clase. Crea la instancia de la clase que maneja el output
 	 * @param string $output
 	 */
 	public function __construct($output) {
+		if(is_null($output)) {
+			$output = Application::getInstance()->getOutput();
+		}
 		$className = "Output".ucfirst($output);
 		
 		if(class_exists($className)) {
 			$this->output = new $className();
+		} else {
+			#TODO: Excepcion de clase de output no encontrada
 		}
+//		print_r(get_class($this));
+		
 		Config::module($this);
+		$this->getOutput()->process($this);
+//		Css::append($this->css);
+//		echo "<pre>";print_r($this);echo "</pre>";
 	}
-
+	
 	/**
 	 * Devuelve la instancia de la clase de Output
 	 * @return Output
