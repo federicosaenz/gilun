@@ -10,6 +10,8 @@
  */
 abstract class Module {
 
+	public $data;
+	
 	/**
 	 * Clase para manejo de output
 	 * @var stdClass
@@ -27,10 +29,8 @@ abstract class Module {
 	 * Constructor de la clase. Crea la instancia de la clase que maneja el output
 	 * @param string $output
 	 */
-	public function __construct($output) {
-		if(is_null($output)) {
-			$output = Application::getInstance()->getOutput();
-		}
+	public function __construct() {
+		$output = Application::getInstance()->getOutput();
 		$className = "Output".ucfirst($output);
 		
 		if(class_exists($className)) {
@@ -38,12 +38,8 @@ abstract class Module {
 		} else {
 			#TODO: Excepcion de clase de output no encontrada
 		}
-//		print_r(get_class($this));
-		
 		Config::module($this);
 		$this->getOutput()->process($this);
-//		Css::append($this->css);
-//		echo "<pre>";print_r($this);echo "</pre>";
 	}
 	
 	/**
@@ -68,6 +64,11 @@ abstract class Module {
 
 	public function getCache() {
 		return $this->cache;
+	}
+
+	public function setData($data) {
+		$this->data = $data;
+		$this->render();
 	}
 
 }
