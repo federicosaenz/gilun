@@ -22,7 +22,10 @@ final class Home extends Module implements IModule {
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-		$this->getOutput()->addChild("idCopado",new ExampleC1(Application::getInstance()->getOutput()));
+		$ImageExample = new ImageExample();
+		$ImageExample->setAlt("asas");
+		$this->getOutput()->addChild("logo",$ImageExample);
+//		$this->getOutput()->addChild("containerExample",new ContainerExample());
 		
 //		echo $this->getOutput()->getEngine()->save();
 //		return array("hola","mundo");
