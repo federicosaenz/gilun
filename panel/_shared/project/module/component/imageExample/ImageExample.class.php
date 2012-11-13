@@ -16,7 +16,7 @@ final class ImageExample extends Component implements IModule {
 	 * @return string
 	 */
 	public function getConfigPath() {
-		return dirname(__FILE__).DIRECTORY_SEPARATOR.get_class($this).".config.json";
+		return dirname(__FILE__).DS.get_class($this).".".self::CONFIG_FILE;
 	}
 
 	/**
@@ -25,10 +25,8 @@ final class ImageExample extends Component implements IModule {
 	public function render() {
 		$imageData = $this->data->getImageData();
 		$this->getOutput()->setAttribute("imageExampleImg","src",$imageData["source"]);
+		$this->getOutput()->setAttribute("imageExampleImg","alt",$imageData["alt"]);
 	}
 
-	public function setAlt($alt) {
-		$this->getOutput()->setAttribute("imageExampleImg","alt",$alt);
-	}
 }
 ?>

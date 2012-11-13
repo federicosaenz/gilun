@@ -15,20 +15,28 @@ final class Home extends Module implements IModule {
 	 * @return string
 	 */
 	public function getConfigPath() {
-		return dirname(__FILE__).DS.get_class($this).".config.json";
+		return dirname(__FILE__).DS.get_class($this).".".self::CONFIG_FILE;
 	}
 
 	/**
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-		$ImageExample = new ImageExample();
-		$ImageExample->setAlt("asas");
-		$this->getOutput()->addChild("logo",$ImageExample);
-//		$this->getOutput()->addChild("containerExample",new ContainerExample());
+		$this->getOutput()->addChild("logo",new ImageExample());
+		$this->getOutput()->addChild("txtWelcome",new ExampleText());
 		
-//		echo $this->getOutput()->getEngine()->save();
-//		return array("hola","mundo");
+		$ExampleTextData = new ExampleTextData();
+		$data = $this->data->getDescriptionText();
+		$ExampleTextData->setText($data);
+
+		$ExampleText = new ExampleText(false);
+		$ExampleText->setData($ExampleTextData);
+		$ExampleText->setClass("et_desc");
+		$this->getOutput()->addChild("txtDescription",$ExampleText);
+
+		if(Project::isDevelopmentMode()) {
+			$this->getOutput()->addChild($this->getOutput()->getElement("body"),new DeveloperBar());
+		}
 	}
 }
 ?>

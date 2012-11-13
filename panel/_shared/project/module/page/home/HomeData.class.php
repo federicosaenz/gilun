@@ -9,8 +9,17 @@
  * 
  */
 
-final class HomeData  {
+final class HomeData extends DataObject {
 
-	
+
+	public function init() {
+		$out = glob(PATH_DATA."*.php");
+		if(empty($out)) {
+			$descriptionText = "No se generaron todavía los objetos de acceso a datos";
+		} else {
+			$descriptionText = "Ya se generaron los objetos de acceso a datos";
+		}
+		$this->setDescriptionText($descriptionText);
+	}
 }
 ?>

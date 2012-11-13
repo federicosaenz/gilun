@@ -9,10 +9,10 @@
  * 
  */
 
-final class ExampleC1Data  {
+final class DeveloperBarData  extends DataObject {
 
-	public function getDatosCabecera() {
-		return array("acavauno","acavaelotro");
+	public function init() {
+		$this->setTime(round(Timer::get(),3)." seg");
 	}
 }
 ?>
