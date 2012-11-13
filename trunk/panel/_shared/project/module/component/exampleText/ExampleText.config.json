@@ -1,0 +1,18 @@
+{
+	"cache" : {
+		"status"	: "enabled",
+		"expires"	:  3600
+	},
+	"data" : "ExampleTextData",
+	"output" :  {
+		"html": {
+			"engine" : "DomHtml",
+			"tpl"	 : "module/component/exampleText/tpl/exampleText.html",
+			"css"	 : [
+				"module/component/exampleText/css/exampleText.css",
+				"module/component/exampleText/css/anotherExampleText.css"
+			],
+			"js"	 : []
+		}
+	}
+}
