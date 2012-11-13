@@ -75,5 +75,9 @@ class OutputHtml extends Output {
 			Js::append($this->js,$moduleClass);
 		}
 	}
+
+	public function getElement($tagName) {
+		return $this->engine->getElement($tagName);
+	}
 }
 ?>
