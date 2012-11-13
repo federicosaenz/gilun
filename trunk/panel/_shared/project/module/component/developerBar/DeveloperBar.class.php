@@ -9,22 +9,21 @@
  * 
  */
 
-final class ExampleC1 extends Component implements IModule {
+final class DeveloperBar extends Component implements IModule {
 
 	/**
 	 * Devuelve el path donde se encuentra el archivo de configuracion de la pagina
 	 * @return string
 	 */
 	public function getConfigPath() {
-		return dirname(__FILE__).DIRECTORY_SEPARATOR.get_class($this).".config.json";
+		return dirname(__FILE__).DIRECTORY_SEPARATOR.get_class($this).".".self::CONFIG_FILE;
 	}
 
 	/**
 	 * Metodo que devuelve los datos para impresion de la pagina
 	 */
 	public function render() {
-		$arrayDatosCabecera = $this->data->getDatosCabecera();
-		$this->getOutput()->setValue("cabeceraTitulo",$arrayDatosCabecera[0]);
+		$this->getOutput()->setValue("time",$this->data->getTime());
 	}
 }
 ?>

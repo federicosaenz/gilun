@@ -1,0 +1,15 @@
+.db_ctn {
+	position:fixed;
+	left:0px;
+	bottom:0px;
+	background-color:#222;
+	width:100%;
+	font-family:Arial;
+	font-size:11px;
+	padding:4px 3px;
+	box-shadow:0 1px 16px 0 #000;
+}
+
+.db_btn {
+	float:left;
+}

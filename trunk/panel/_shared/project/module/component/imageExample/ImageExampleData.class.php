@@ -9,10 +9,11 @@
  * 
  */
 
-final class ImageExampleData  {
+final class ImageExampleData extends DataObject {
 
-	public function getImageData() {
-		return array("source"=>"ext/img/logo.png","alt"=>"Gil&uacute;n Framework");
+	public function init() {
+		$this->setImageData(array("source"=>"ext/img/logo.png","alt"=>"Gilún Framework"));
 	}
+
 }
 ?>
