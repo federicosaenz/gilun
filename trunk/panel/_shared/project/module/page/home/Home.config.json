@@ -9,8 +9,7 @@
 			"engine" : "DomHtml",
 			"tpl"	 : "module/page/home/tpl/home.html",
 			"css"	 : [
-				"css/schema/general.css",
-				"css/schema/general2.css"
+				"module/page/home/css/general.css"
 			],
 			"js"	 : [
 				"js/schema/general.js",
