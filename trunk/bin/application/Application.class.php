@@ -73,7 +73,7 @@ final class Application extends Singleton {
 	 * Corre la aplicacion
 	 */
 	public function run() {
-//		Timer::begin();
+		Timer::begin();
 			
 		#Traigo el objeto de configuracion del entorno
 		$this->env = Config::getEnv();

@@ -82,13 +82,22 @@ final class DomHtml implements IOutput{
 	}
 
 	public function getContent() {
-//		pr($this->dom->getElementsByTagName("body")->item(0)->firstChild);
 		return $this->dom->getElementsByTagName("body")->item(0)->firstChild;
 	}
 
 	public function write() {
-		return $this->dom->saveHTML();
+		$return = $this->dom->saveHTML();
+		$return = preg_replace("/xml\:id\=\".[^\"]*\"/i","",$return);
+		$return = preg_replace("/xml\:id\=\'.[^\']*\'/i","",$return);
+		return $return;
 	}
 
+	public function getElement($tagName) {
+		$nodeList = $this->dom->getElementsByTagName($tagName);
+		if($nodeList) {
+			return $nodeList->item(0);
+		}
+		return false;
+	}
 }
 ?>
