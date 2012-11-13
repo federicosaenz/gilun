@@ -50,6 +50,11 @@ final class DomHtml implements IOutput{
 		$this->getElementById($elementId)->nodeValue = $value;
 	}
 
+	public function setAttribute($element,$attribute,$value) {
+		$node = $this->getElementById($element);
+		$node->setAttribute($attribute,$value);
+	}
+
 	/**
 	 *
 	 */

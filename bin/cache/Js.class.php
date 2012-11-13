@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase generadora de css
+ * Clase generadora de js
  *
  * @author Federico Saenz
  * @date 06/04/2011
@@ -10,7 +10,7 @@
  *
  *
  */
-final class Css {
+final class Js {
 	
 	/**
 	 * Nombre del path del archivo de coleccion de Css
@@ -50,26 +50,14 @@ final class Css {
 	public static function generate() {
 		if(self::$reload) {
 			file_put_contents(self::$collectionFile,self::CollectionToString(self::$collection));
-			file_put_contents(self::$extFile,self::getExternalCss());
+			file_put_contents(self::$extFile,self::getExternalJs());
 		}
 	}
 
-	public static function getExternalCss() {
+	public static function getExternalJs() {
 		$strCss = "";
 		foreach(self::getCollection() as $nameFile=>$value) {
 			$strCss .= file_get_contents($nameFile);
-			preg_match_all("/\[.*\]/",$strCss,$matches);
-			if(!empty($matches[0])) {
-				foreach($matches[0] as $match) {
-					$replacement = str_replace(array("[","]"),array("",""),$match);
-					if(defined($replacement)) {
-						$strCss = str_replace($match,constant($replacement),$strCss);
-					} else {
-						#Excepcion de tipo notice de que no existe la constante
-					}
-				}
-			}
-//			$strCss = preg_replace("/\[(.*)\]/",eval("$1"),$strCss);
 		}
 		return $strCss;
 	}
@@ -80,7 +68,7 @@ final class Css {
 	 */
 	public static function setCollectionFile($collectionFileName) {
 		if(!self::$collectionFile) {
-			self::$collectionFile = PATH_CACHE_SYSTEM.$collectionFileName.".css.php";
+			self::$collectionFile = PATH_CACHE_SYSTEM.$collectionFileName.".js.php";
 		}
 	}
 
@@ -90,7 +78,7 @@ final class Css {
 	 */
 	public static function setExtFile($extFileName) {
 		if(!self::$extFile) {
-			self::$extFile = PATH_EXT.$extFileName.".css";
+			self::$extFile = PATH_EXT.$extFileName.".js";
 		}
 	}
 
@@ -100,7 +88,7 @@ final class Css {
 	 */
 	public static function setUrl($extFileName) {
 		if(!self::$url) {
-			self::$url = "ext/".$extFileName.".css";
+			self::$url = "ext/".$extFileName.".js";
 		}
 	}
 
@@ -141,7 +129,7 @@ final class Css {
 	}
 
 	/**
-	 * Va agregando cada archivoCss en la coleccion de archivos
+	 * Va agregando cada archivo js en la coleccion de archivos
 	 * @param array $cssFiles
 	 * @param Module $moduleClass
 	 */
