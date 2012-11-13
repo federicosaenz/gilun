@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase main de la aplicacion
+ * Clase Project de la aplicacion
  *
  * @author Federico Saenz
  * @version 1.0 11/04/2011
@@ -10,30 +10,18 @@
  * 
  */
 
-final class Application extends Singleton {
+final class Project {
 
-	/**
-	 * Contiene la clase de configuracion de la aplicacion
-	 * @var stdClass
-	 */
-	private $env;
-
-	/**
-	 * Contiene la clase de configuracion de la aplicacion
-	 * @var stdClass
-	 */
-	private $config;
-
-	/**
-	 * Contiene el valor del output que se desea generar
-	 * @var string
-	 */
-	private $output;
-	
 	/**
 	 * Constructor de la clase
 	 */
 	protected function  __construct() {
+	}
+
+	public static function defineConstants() {
+		Constant::register("URL_SITE", Application::getInstance()->getDomain().DS);
+		Constant::register("URL_EXTERNAL", URL_SITE."ext".DS);
+		Constant::register("URL_IMAGES", URL_EXTERNAL."img".DS);
 	}
 
 	/**
@@ -77,7 +65,7 @@ final class Application extends Singleton {
 			
 		#Traigo el objeto de configuracion del entorno
 		$this->env = Config::getEnv();
-		Project::defineConstants();
+
 		#Seteo el output
 		$this->output = Get::getParameter("output","html");
 

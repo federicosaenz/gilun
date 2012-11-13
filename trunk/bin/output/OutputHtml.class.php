@@ -28,6 +28,14 @@ class OutputHtml extends Output {
 		return self::OUTPUT_TYPE;
 	}
 
+	public function createJsNode() {
+		$nodeList = $this->engine->getElementsByTagName("head");
+		$link = $this->engine->getDom()->createElement("script");
+		$link->setAttribute("src",Js::getUrl());
+	    $link->setAttribute("type","text/javascript");
+		$this->addChild($nodeList->item(0), $link);
+	}
+
 	public function createCssNode() {
 		$nodeList = $this->engine->getElementsByTagName("head");
 		$link = $this->engine->getDom()->createElement("link");
@@ -35,8 +43,10 @@ class OutputHtml extends Output {
 	    $link->setAttribute("rel","stylesheet");
 		$this->addChild($nodeList->item(0), $link);
 	}
+
 	public function write() {
 		$this->createCssNode();
+		$this->createJsNode();
 		return $this->engine->write();
 	}
 
@@ -52,14 +62,18 @@ class OutputHtml extends Output {
 		$this->engine->setValue($elementId,$value);
 	}
 
+	public function setAttribute($element,$attribute,$value) {
+		$this->engine->setAttribute($element,$attribute,$value);
+	}
+
 	public function process($moduleClass) {
 		if($this->css) {
 			Css::append($this->css,$moduleClass);
 		}
-//		if($this->js) {
-//			Js::append($this->js);
-//		}
 
+		if($this->js) {
+			Js::append($this->js,$moduleClass);
+		}
 	}
 }
 ?>
