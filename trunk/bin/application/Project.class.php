@@ -14,9 +14,9 @@ final class Project {
 
 	public static function defineConstants() {
 		#TODO: cambiar el http harcodeado por el valor determinado en protocol
-		Constant::register("URL_SITE", "http://".Application::getInstance()->getDomain().DS);
-		Constant::register("URL_EXTERNAL", URL_SITE."ext".DS);
-		Constant::register("URL_IMAGES", URL_EXTERNAL."img".DS);
+		Constant::register("URL_SITE", "http://".Application::getInstance()->getDomain()."/");
+		Constant::register("URL_EXTERNAL", URL_SITE."ext/");
+		Constant::register("URL_IMAGES", URL_EXTERNAL."img/");
 	}
 
 	public static function isDevelopmentMode() {
