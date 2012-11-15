@@ -100,7 +100,9 @@ final class Js {
 	public static function CollectionToString(array $collection) {
 		$str = "<?php\r\n";
 		foreach($collection as $key=>$value) {
-			$str .= "\$a['".$key."']='".$value."';\r\n";
+			if(file_exists($key)) {
+				$str .= "\$a['".$key."']='".$value."';\r\n";
+			}
 		}
 		$str.="return \$a;?>";
 		return $str;
