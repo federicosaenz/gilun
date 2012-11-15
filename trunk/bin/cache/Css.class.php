@@ -112,7 +112,9 @@ final class Css {
 	public static function CollectionToString(array $collection) {
 		$str = "<?php\r\n";
 		foreach($collection as $key=>$value) {
-			$str .= "\$a['".$key."']='".$value."';\r\n";
+			if(file_exists($key)) {
+				$str .= "\$a['".$key."']='".$value."';\r\n";
+			}
 		}
 		$str.="return \$a;?>";
 		return $str;
@@ -151,12 +153,14 @@ final class Css {
 		self::setUrl(get_class($moduleClass));
 		
 		foreach($cssFiles as $file) {
+			
 			if(file_exists($file) && is_readable($file)) {
 				$modified = filemtime($file);
 				$collection = self::getCollection();
 				
 				if(!isset($collection[$file]) || ($modified != $collection[$file])) {
 					self::setCollection($file,$modified);
+				
 					self::$reload = true;
 				}
 			} else {
