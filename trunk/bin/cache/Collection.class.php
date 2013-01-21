@@ -35,11 +35,11 @@ final class Collection {
 	 * @param string $cacheFile
 	 */
 	public function __construct($cacheFile=null) {
-		$this->cachefile = $cacheFile;
+		self::$cachefile = $cacheFile;
 		
-		if(is_readable($this->cachefile)) {
+		if(is_readable(self::$cachefile)) {
 			if(!$this->items) {
-				include_once($this->cachefile);
+				include_once(self::$cachefile);
 				if(isset($c)) {
 					$this->items = $c;
 				}
@@ -84,7 +84,7 @@ final class Collection {
 			$data .= "\$c['$key'] = '$value';\r\n";
 		}
 		$data .= "?>";
-		file_put_contents($this->cachefile, $data);
+		file_put_contents(self::$cachefile, $data);
 	}
 }
 ?>

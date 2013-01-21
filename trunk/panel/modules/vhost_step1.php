@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("../classes/windowButton.class.php");
 
 function isProyect($nameDir) {

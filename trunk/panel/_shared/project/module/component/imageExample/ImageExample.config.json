@@ -4,16 +4,18 @@
 		"expires"	:  3600
 	},
 	"data" : "ImageExampleData",
-	"output" :  {
-		"html": {
-			"engine" : "DomHtml",
-			"tpl"	 : "module/component/imageExample/tpl/imageExample.html",
-			"css"	 : [],
-			"js"	 : []
-		},
-		"xml" : {
-			"engine" : "DomXml",
-			"tpl"	 : "schema/xml/template.xml"
+	"actions" :  {
+		"render": {
+			"html": {
+				"engine" : "DomHtml",
+				"tpl"	 : "module/component/imageExample/tpl/imageExample.html",
+				"css"	 : [],
+				"js"	 : []
+			},
+			"xml" : {
+				"engine" : "DomXml",
+				"tpl"	 : "schema/xml/template.xml"
+			}
 		}
 	}
 }

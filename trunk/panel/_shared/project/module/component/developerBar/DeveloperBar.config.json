@@ -4,16 +4,24 @@
 		"expires"	:  3600
 	},
 	"data" : "DeveloperBarData",
-	"output" :  {
-		"html": {
-			"engine" : "DomHtml",
-			"tpl"	 : "module/component/developerBar/tpl/developerBar.html",
-			"css"	 : [
-				"module/component/developerBar/css/developerBar.css"
-			],
-			"js"	 : [
-				"module/component/developerBar/js/developerBar.js"
-			]
+	"actions": {
+		"render": {
+			"html": {
+				"engine" : "DomHtml",
+				"tpl"	 : "module/component/developerBar/tpl/developerBar.html",
+				"css"	 : [
+					"module/component/developerBar/css/developerBar.css"
+				],
+				"js"	 : [
+					"module/component/developerBar/js/developerBar.js"
+				]
+			}
+		},
+		"getNoticesError": {
+			"json": {
+				"engine" : "Json",
+				"tpl"	 : "module/component/developerBar/tpl/noticesError.json"
+			}
 		}
 	}
 }

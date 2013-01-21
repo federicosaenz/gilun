@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("../classes/windowButton.class.php");
 
 $ButtonClose = new windowButton();
@@ -19,6 +19,6 @@ $ButtonClose->setId("idButtonClose");
 	</div>
 	<div style="width:100%;text-align:right;padding-top:10px">
 		<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		<? echo $ButtonClose->getButton() ?>
+		<?php echo $ButtonClose->getButton() ?>
 	</div>
 </div>

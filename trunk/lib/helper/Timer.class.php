@@ -35,7 +35,7 @@ final class Timer {
 	 * Devuelve el tiempo formateado en microsegundos
 	 * @return string
 	 */
-	private function getFormattedMicrotime() {
+	private static function getFormattedMicrotime() {
 		list($useg, $seg) = explode(" ", microtime());
 		return ((float)$useg + (float)$seg);
 	}

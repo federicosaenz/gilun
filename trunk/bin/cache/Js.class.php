@@ -55,11 +55,11 @@ final class Js {
 	}
 
 	public static function getExternalJs() {
-		$strCss = "";
+		$strJs = "";
 		foreach(self::getCollection() as $nameFile=>$value) {
-			$strCss .= file_get_contents($nameFile);
+			$strJs .= file_get_contents($nameFile)."\r\n";
 		}
-		return $strCss;
+		return $strJs;
 	}
 
 	/**

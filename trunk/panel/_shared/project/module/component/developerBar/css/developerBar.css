@@ -12,4 +12,70 @@
 
 .db_btn {
 	float:left;
+	padding-right: 30px;
+}
+
+.db_btn .db_lbl{
+	padding: 0px 2px 0px 5px;
+	font-weight: bold;
+}
+
+.db_button {
+	background-color:#222;
+	border:1px solid #555;
+	color:#FFF;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.db_right {
+	float:right;
+	padding-right:10px;
+}
+
+.db_errors {
+	padding-left:40px;
+	float:left;
+}
+.db_warning {
+	background-image:url(../ext/img/devBar/warning.png);
+	background-repeat: no-repeat;
+	background-position: 10px 3px;
+	background-size: 11px;
+}
+	
+.db_notice {
+	background-image:url(../ext/img/devBar/notice.png);
+	background-repeat: no-repeat;
+	background-position: 8px 3px;
+	background-size: 11px;
+}
+
+.db_btnInfo {
+	width:21px;
+	height:12px;
+	float:left;
+	padding:2px 0px 2px 2px;
+	cursor: pointer;
+}
+
+.db_btnInfo:hover {
+	background-color:#555;
+}
+
+.db_console {
+	display:none;
+	position:absolute;
+	right:6px;
+	bottom:24px;
+	width:590px;
+	background-color:#222;
+	padding:6px;
+	padding-bottom:10px;
+	box-shadow:0 1px 16px 0 #000;
+	
+}
+
+.db_console_notice {
+	
 }

@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("../classes/windowButton.class.php");
 
 $ButtonPrev = new windowButton();
@@ -52,7 +52,7 @@ switch($env) {
 <div style="padding:20px;">
 	<div>
 		<div style="float:left">
-			<img src="<? echo $imagesrc?>" style="width:250px;height:400px;animation:suavizado 0.4s 1;-moz-animation:suavizado 0.4s 1;-webkit-animation:suavizado 0.4s 1;" alt="" />
+			<img src="<?php echo $imagesrc?>" style="width:250px;height:400px;animation:suavizado 0.4s 1;-moz-animation:suavizado 0.4s 1;-webkit-animation:suavizado 0.4s 1;" alt="" />
 		</div>
 		<div style="float:left;padding-left:50px;width:380px;">
 			<div style="font-size:20px">Configuraci&oacute;n del entorno de <?echo $nameEnvironment?></div>
@@ -60,22 +60,22 @@ switch($env) {
 			<table border="0" style="font-size:12px">
 				<tr>
 					<td>Dominio:</td>
-					<td><input type="text" id="<? echo $env?>_domainName" name="<? echo $env?>_domainName" value="<?echo $domainName?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_domainName" name="<?php echo $env?>_domainName" value="<?php echo $domainName?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
 				</tr>
 				<tr>
 					<td>Usuario:</td>
-					<td><input type="text" id="<? echo $env?>_domainUser"name="<? echo $env?>_domainUser" value="<?echo $domainUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_domainUser"name="<?php echo $env?>_domainUser" value="<?php echo $domainUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
 				</tr>
 				<tr>
 					<td>Contrase&ntilde;a:</td>
-					<td><input type="text" id="<? echo $env?>_domainPass" name="<? echo $env?>_domainPass" value="<?echo $domainPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_domainPass" name="<?php echo $env?>_domainPass" value="<?php echo $domainPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:250px;" /></td>
 				</tr>
 			</table>
 			<hr />
 			<div style="font-size:13px;padding-bottom:10px;">Ingrese los valores para la configuraci&oacute;n de <b>base de datos</b></div>
 			<div>
 				<span style="font-size:12px">Driver:</span>
-				<select style="border:1px solid #444;color:#444;font-style:italic;width:250px;" id="<? echo $env?>_dbdriver" name="<? echo $env?>_dbdriver">
+				<select style="border:1px solid #444;color:#444;font-style:italic;width:250px;" id="<?php echo $env?>_dbdriver" name="<?php echo $env?>_dbdriver">
 					<option value="Mysql">Mysql</option>
 				</select>
 			</div>
@@ -87,42 +87,42 @@ switch($env) {
 				</tr>
 				<tr>
 					<td>Nombre:</td>
-					<td><input type="text" id="<? echo $env?>_dbRead_name" name="<? echo $env?>_dbRead_name" value="<?echo $dbReadName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbRead_name" name="<?php echo $env?>_dbRead_name" value="<?php echo $dbReadName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Nombre:</td>
-					<td><input type="text" id="<? echo $env?>_dbWrite_name" name="<? echo $env?>_dbWrite_name" value="<?echo $dbWriteName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbWrite_name" name="<?php echo $env?>_dbWrite_name" value="<?php echo $dbWriteName?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Host:</td>
-					<td><input type="text" id="<? echo $env?>_dbRead_host" name="<? echo $env?>_dbRead_host" value="<?echo $dbReadHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbRead_host" name="<?php echo $env?>_dbRead_host" value="<?php echo $dbReadHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Host:</td>
-					<td><input type="text" id="<? echo $env?>_dbWrite_host" name="<? echo $env?>_dbWrite_host" value="<?echo $dbWriteHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbWrite_host" name="<?php echo $env?>_dbWrite_host" value="<?php echo $dbWriteHost?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Usario:</td>
-					<td><input type="text" id="<? echo $env?>_dbRead_user" name="<? echo $env?>_dbRead_user" value="<?echo $dbReadUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbRead_user" name="<?php echo $env?>_dbRead_user" value="<?php echo $dbReadUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Usario:</td>
-					<td><input type="text" id="<? echo $env?>_dbWrite_user" name="<? echo $env?>_dbWrite_user" value="<?echo $dbWriteUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbWrite_user" name="<?php echo $env?>_dbWrite_user" value="<?php echo $dbWriteUser?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Contrase&ntilde;a:</td>
-					<td><input type="text" id="<? echo $env?>_dbRead_pass" name="<? echo $env?>_dbRead_pass" value="<?echo $dbReadPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbRead_pass" name="<?php echo $env?>_dbRead_pass" value="<?php echo $dbReadPass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Contrase&ntilde;a:</td>
-					<td><input type="text" id="<? echo $env?>_dbWrite_pass" name="<? echo $env?>_dbWrite_pass" value="<?echo $dbWritePass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbWrite_pass" name="<?php echo $env?>_dbWrite_pass" value="<?php echo $dbWritePass?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 				<tr>
 					<td>Puerto:</td>
-					<td><input type="text" id="<? echo $env?>_dbRead_port" name="<? echo $env?>_dbRead_port" value="<?echo $dbReadPort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbRead_port" name="<?php echo $env?>_dbRead_port" value="<?php echo $dbReadPort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 					<td style="padding-left:20px;">Puerto:</td>
-					<td><input type="text" id="<? echo $env?>_dbWrite_port" name="<? echo $env?>_dbWrite_port" value="<?echo $dbWritePort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
+					<td><input type="text" id="<?php echo $env?>_dbWrite_port" name="<?php echo $env?>_dbWrite_port" value="<?php echo $dbWritePort?>" style="border:1px solid #444;color:#444;font-style:italic;width:100px;" /></td>
 				</tr>
 			</table>
 		</div>
 		<div style="clear:both"></div>
 	</div>
 	<div style="width:100%;text-align:right;padding-top:10px">
-		<? echo $ButtonPrev->getButton() ?>
-		<? echo $ButtonNext->getButton() ?>
+		<?php echo $ButtonPrev->getButton() ?>
+		<?php echo $ButtonNext->getButton() ?>
 		<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		<? echo $ButtonClose->getButton() ?>
+		<?php echo $ButtonClose->getButton() ?>
 	</div>
 </div>

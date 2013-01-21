@@ -43,9 +43,11 @@ final class Config {
 			$envFile = PATH_CONFIG.self::ENVIRONMENT_FILE;
 			$envConfig = self::getJson($envFile);
 			if(!empty($envConfig)) {
+				self::$env = $envConfig[0];
 				foreach($envConfig as $env=>$oConfig) {
 					if($oConfig->domain == Server::get("HTTP_HOST")) {
 						self::$env = $oConfig;
+						break;
 					}
 				}
 			} else {
@@ -81,11 +83,13 @@ final class Config {
 		if($module->getOutput()) {
 			$type = $module->getOutput()->getType();
 			$cnf = self::getJson($module->getConfigPath());
+			
 			if($cnf->data) {
 				$module->data =  new $cnf->data();
 			}
+			$accion = $module->getAccion();
 			
-			foreach($cnf->output->$type as $property => $value) {
+			foreach($cnf->actions->$accion->$type as $property => $value) {
 				switch($property) {
 					case "engine":
 						$module->getOutput()->setEngine(new $value());
@@ -123,6 +127,21 @@ final class Config {
 		}
 
 		return self::$connection;
+	}
+	
+	/**
+	 * Configura la clase de manejos de error
+	 * @return stdClass
+	 */
+	public static function error(Errors $Error) {
+		if(!self::$config) {
+			if(self::$env) {
+				$configFile = PATH_CONFIG.self::$env->name.DS.self::CONFIG_FILE;
+			}
+			self::$config = self::getJson($configFile);
+		}
+		$methodName = $Error::errorLevelText;
+		$Error->setConfig(self::$config->debug->$methodName);
 	}
 }
 ?>
