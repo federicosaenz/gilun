@@ -41,7 +41,7 @@ $directoryProj = dir(dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARA
 					if(isProyect($nameProy)) {
 ?>
 					<option value="<?php echo $nameProy?>"><?php echo $nameProy?></option>
-<?
+<?php
 					}
 				}
 ?>
