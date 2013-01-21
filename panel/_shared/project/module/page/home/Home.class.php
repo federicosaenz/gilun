@@ -29,7 +29,7 @@ final class Home extends Module implements IModule {
 		$data = $this->data->getDescriptionText();
 		$ExampleTextData->setText($data);
 
-		$ExampleText = new ExampleText(false);
+		$ExampleText = new ExampleText('render',false);
 		$ExampleText->setData($ExampleTextData);
 		$ExampleText->setClass("et_desc");
 		$this->getOutput()->addChild("txtDescription",$ExampleText);

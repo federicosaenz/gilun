@@ -12,6 +12,8 @@
 
 final class Application extends Singleton {
 
+	private $displayErrors = true;
+	
 	/**
 	 * Contiene la clase de configuracion de la aplicacion
 	 * @var stdClass
@@ -86,7 +88,7 @@ final class Application extends Singleton {
 		$accion		= Get::getParameter("accion","render");
 		
 		if(class_exists($className = $manager)) {
-			$managerClass = new $className($this->output);
+			$managerClass = new $className($accion);
 			$cacheConf = $managerClass->getCache();
 			Cache::setup($cacheConf->status,$cacheConf->expires,Server::get("REQUEST_URI"));
 			if($cache = Cache::read()) {
@@ -96,13 +98,15 @@ final class Application extends Singleton {
 				if(method_exists($managerClass, $accion) ) {
 					$managerClass->$accion();
 					$content = $managerClass->getOutput()->write();
-					$Mysql = Connection::getInstance()->getConnection();
-					
 					Cache::write($content);
+					if($this->displayErrors) {
+						ErrorLog::getInstance()->displayErrors();
+					}
 					echo $content;
 				} else {
 					#EXCEPCION: no existe la accion para ese manager.
 				}
+				
 			}
 		} else {
 			#EXCEPCION: devolver excepcion de que no existe el manager o el output es invalido
@@ -111,6 +115,10 @@ final class Application extends Singleton {
 //		echo Timer::get();
 	}
 
+	public function displayErrors($displayErrors) {
+		$this->displayErrors = $displayErrors;
+	}
+	
 	public function getDomain() {
 		return $this->env->domain;
 	}

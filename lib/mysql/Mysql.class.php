@@ -42,14 +42,14 @@ final class Mysql implements IConnection {
 	 * @param string $db
 	 */
 	public function __construct($host, $user, $pass, $db) {
+		mysqli_report(MYSQLI_REPORT_STRICT);
 		$this->host		= $host;
 		$this->dbName	= $db;
-		$this->mysqli	= new mysqli($host, $user, $pass, $db);
-
-        if (mysqli_connect_error()) {
-            echo "no se pudo conectar a la base de datos";
-			#[TODO]: Excepcion de que no se pudo conectar a la base de datos
-        }
+		try {
+			$this->mysqli	= new mysqli($host, $user, $pass, $db);
+		} catch(Exception $e) {
+			ErrorLog::getInstance()->notice("Error conectando a la base de datos",Errors::CONNECTION_ERROR,__FILE__,__LINE__,  debug_backtrace());
+		}
 	}
 
 	/**
@@ -60,8 +60,16 @@ final class Mysql implements IConnection {
 	 */
 	public function query($query,$return=true) {
 		$this->lastQuery = $query;
-		$this->mysqli->real_query($query);
-		return $return ? new MysqlResult($this->mysqli) : null;
+		if($this->mysqli) {
+			try {
+				$this->mysqli->real_query($query);
+			} catch(Exception $e) {
+				ErrorLog::getInstance()->warning("Error al tratar de ejecutar un query",Errors::CONNECTION_ERROR,__FILE__,__LINE__,  debug_backtrace());
+			}
+			return $return ? new MysqlResult($this->mysqli) : null;
+		} else {
+			ErrorLog::getInstance()->warning("Error al tratar de ejecutar un query",Errors::CONNECTION_ERROR,__FILE__,__LINE__,  debug_backtrace());
+		}
 	}
 
 	/**

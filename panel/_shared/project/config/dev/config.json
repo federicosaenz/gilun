@@ -1,4 +1,17 @@
 {
-	"debug" : @@DEV_DEBUG@@,
-	"cache" : @@DEV_CACHE@@
+	"debug" : {
+		"notice": {
+			"display": "on",
+			"outputs": [
+				"console","window", "file", "email"
+			]
+		},
+		"warning": {
+			"display": "on",
+			"outputs": [
+				"console", "window"
+			]
+		}
+	},
+	"cache" : {}
 }

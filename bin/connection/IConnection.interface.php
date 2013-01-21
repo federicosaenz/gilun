@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Interface para manejo de base de datos

@@ -1,6 +1,29 @@
 <div class="db_ctn" xml:id="barCtn">
+	<div id="dbConsole" class="db_console"></div>
 	<div class="db_btn">
-		<span><b>Tiempo de Carga:</b></span>
-		<span xml:id="time"></span>
+		<span class="db_lbl">Tiempo de Carga:</span><span xml:id="time"></span>
+		<span class="db_lbl">Cache:</span><span xml:id="cache">Generated</span>
 	</div>
+	<div class="db_btn">
+		<input type="button" xml:id="button" id="btnGDAO"class="db_button" />
+	</div>
+	
+	<div class="db_right">
+		
+		<div class="db_errors">
+			<div xml:id="errorNoticesLink" class="db_btnInfo db_notice" id="dbNotice"><span xml:id="errorNoticesCount"></span></div>
+			<div xml:id="errorWarningsLink" class="db_btnInfo db_warning" id="dbWarning"><span xml:id="errorWarningsCount"></span></div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		db = new DeveloperBar(
+			{	"ButttonDaoBuilder_id"	:"btnGDAO", 
+				"ButtonNotice_id"		:"dbNotice", 
+				"Console_id"			:"dbConsole",
+				"ButtonWarning_id"		:"dbWarning" 
+				
+			});
+		db.init();
+	</script>
 </div>

@@ -4,21 +4,22 @@
 		"expires"	:  3600
 	},
 	"data" : "HomeData",
-	"output" :  {
-		"html": {
-			"engine" : "DomHtml",
-			"tpl"	 : "module/page/home/tpl/home.html",
-			"css"	 : [
-				"module/page/home/css/general.css"
-			],
-			"js"	 : [
-				"js/schema/general.js",
-				"js/schema/general2.js"
-			]
-		},
-		"xml" : {
-			"engine" : "DomXml",
-			"tpl"	 : "schema/xml/template.xml"
+	"actions" :  {
+		"render": {
+			"html": {
+				"engine" : "DomHtml",
+				"tpl"	 : "module/page/home/tpl/home.html",
+				"css"	 : [
+					"module/page/home/css/general.css"
+				],
+				"js"	 : [
+					"module/general/jquery-1.9.0.min.js"
+				]
+			},
+			"xml" : {
+				"engine" : "DomXml",
+				"tpl"	 : "schema/xml/template.xml"
+			}
 		}
 	}
 }

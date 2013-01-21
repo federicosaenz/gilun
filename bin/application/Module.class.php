@@ -24,12 +24,19 @@ abstract class Module {
 	 */
 	protected $cache;
 
+	/**
+	 * Accion a ejecutar
+	 * @var string
+	 */
+	protected $accion;
 
 	/**
 	 * Constructor de la clase. Crea la instancia de la clase que maneja el output
 	 * @param string $output
 	 */
-	public function __construct() {
+	public function __construct($accion) {
+		$this->accion = $accion;
+		
 		$output = Application::getInstance()->getOutput();
 		$className = "Output".ucfirst($output);
 		
@@ -50,6 +57,14 @@ abstract class Module {
 		return $this->output;
 	}
 
+	/**
+	 * Devuelve el nombre de la accion a ejecutar
+	 * @return string
+	 */
+	public function getAccion() {
+		return $this->accion;
+	}
+	
 	public function write() {
 		echo $this->output->write();
 	}

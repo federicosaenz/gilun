@@ -57,7 +57,7 @@ final class Css {
 	public static function getExternalCss() {
 		$strCss = "";
 		foreach(self::getCollection() as $nameFile=>$value) {
-			$strCss .= file_get_contents($nameFile);
+			$strCss .= file_get_contents($nameFile)."\r\n";
 			preg_match_all("/\[.*\]/",$strCss,$matches);
 			if(!empty($matches[0])) {
 				foreach($matches[0] as $match) {

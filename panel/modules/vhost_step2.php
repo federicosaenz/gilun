@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("../classes/OutputFile.php");
 
 function isProyect($nameDir) {

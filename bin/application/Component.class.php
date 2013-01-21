@@ -14,9 +14,9 @@ abstract class Component extends Module {
 	 * Constructor de la clase. Crea la instancia de la clase que maneja el output
 	 * @param string $output
 	 */
-	public function __construct($render=true) {
-		parent::__construct();
-		if($render) {
+	public function __construct($accion='render',$render=true) {
+		parent::__construct($accion);
+		if($accion =="render" && $render) {
 			$this->render();
 		}
 	}
