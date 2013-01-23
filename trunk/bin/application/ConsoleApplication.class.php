@@ -80,9 +80,13 @@ final class ConsoleApplication extends Singleton {
 		$this->env = Config::getEnv();
 		$manager = Console::getArgument("manager");
 		
-		if(class_exists($className = $manager) && $className instanceof Task) {
+		if(class_exists($className = $manager)) {
 			$managerClass = new $className();
-			$managerClass->run();
+			if($managerClass instanceof Task) {
+				$managerClass->run();
+			} else {
+				Console::error("No esta definido el task ".$manager);
+			}
 		} else {
 			Console::error("No esta definido el task ".$manager);
 		}

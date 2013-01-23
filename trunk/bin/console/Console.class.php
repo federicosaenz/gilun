@@ -109,7 +109,7 @@ class Console {
 	 * @return string
 	 */
 	public static function getArgument($name) {
-		return self::$argv[self::$argumentPosition[$name]];
+		return isset(self::$argv[self::$argumentPosition[$name]]) ? self::$argv[self::$argumentPosition[$name]] : "";
 	}
 	
 	/**
@@ -117,8 +117,10 @@ class Console {
 	 * @param string $error
 	 */
 	public static function error($error) {
-		self::writeln($error,'white','red');
-		die();
+		if(self::isConsole()) {
+			self::writeln($error,'white','red');
+			die();
+		}
 	}
 	
 	/**
@@ -128,7 +130,7 @@ class Console {
 	 * @param string $bgColor
 	 */
 	public static function write($text,$fontColor=null,$bgColor=null) {
-		echo self::getColoredString($text,$fontColor,$bgColor);
+		if(self::isConsole()) echo self::getColoredString($text,$fontColor,$bgColor);
 	}
 	
 	/**
@@ -138,7 +140,7 @@ class Console {
 	 * @param string $bgColor
 	 */
 	public static function writeln($text,$fontColor=null,$bgColor=null) {
-		echo self::getColoredString($text,$fontColor,$bgColor)."\n";
+		if(self::isConsole()) echo self::getColoredString($text,$fontColor,$bgColor)."\n";
 	}
 	
 	/**
@@ -147,7 +149,7 @@ class Console {
 	 * @param string $fontColor
 	 * @param string $bgColor
 	 */
-	public function getColoredString($string, $fontColor = null, $bgColor = null) {
+	public static function getColoredString($string, $fontColor = null, $bgColor = null) {
 		$return = "";
 		
 		if (isset(self::$fontcolors[$fontColor])) {
@@ -161,6 +163,35 @@ class Console {
 		$return .=  $string . "\033[0m";
  
 		return $return;
+	}
+	
+	/**
+	 * Devuelve true si la aplicacion se esta corriendo por consola, false de lo contrario
+	 * @return boolean
+	 */
+	public static function isConsole() {
+		return (php_sapi_name()=="cli");
+	}
+	
+	/**
+	 * 
+	 */
+	public static function report($text,$fail=false,$max_text_size=80,$charFill='-') {
+		$textSize = strlen($text);
+		if($textSize<=$max_text_size) {
+			$report = $text;
+		} else {
+			$report = substr($text, 0, $max_text_size-3)."...";
+		}
+		for($i=$textSize;$i<$max_text_size;$i++) {
+			$report .= $charFill;
+		}
+		self::write($report);
+		if(!$fail) {
+			self::writeln("[OK]",'white','green');
+		} else {
+			self::writeln("[FAIL]",'white','red');
+		}
 	}
 }
 ?>
