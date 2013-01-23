@@ -1,0 +1,24 @@
+#!/usr/bin/php
+<?php
+if(!defined("DS")) define("DS",DIRECTORY_SEPARATOR);
+
+include_once(dirname(__FILE__).DS."..".DS."..".DS."bin".DS."system".DS."Boot.class.php");
+include_once(dirname(__FILE__).DS."..".DS."..".DS."bin".DS."console".DS."Console.class.php");
+
+Console::init($argc, $argv);
+if($argc==1) {
+	Console::writeln("Error:Faltan argumentos. No se ha ingresado ningun task.",'white','red');
+?>
+
+Uso: ./do [TASK] [PARAMETERS]
+
+Tasks predefinidos:
+BuildDAO - SIN PARAMETROS - (Genera las clases de acceso a datos)
+Permissions - SIN PARAMETROS - (Establece los permisos generales del proyecto)
+CreateTask - SIN PARAMETROS - (Genera un task nuevo)
+<?php
+die();
+}
+Boot::setDirPath(dirname(__FILE__));
+Boot::run("ConsoleApplication");
+?>

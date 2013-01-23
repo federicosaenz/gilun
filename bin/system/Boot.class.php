@@ -62,9 +62,13 @@ final class Boot {
 		Constant::register("PATH_PROJECT"		, self::$dirpath.DS);
 		Constant::register("PATH_CONFIG"		, PATH_PROJECT."config".DS);
 		Constant::register("PATH_DATA"			, PATH_PROJECT."data".DS);
-		Constant::register("PATH_CACHE_HTML"	, PATH_PROJECT."cache".DS."html".DS);
-		Constant::register("PATH_CACHE_SYSTEM"	, PATH_PROJECT."cache".DS."system".DS);
+		Constant::register("PATH_CACHE"			, PATH_PROJECT."cache".DS);
+		Constant::register("PATH_CACHE_HTML"	, PATH_CACHE."html".DS);
+		Constant::register("PATH_CACHE_SYSTEM"	, PATH_CACHE."system".DS);
 		Constant::register("PATH_EXT"			, PATH_PROJECT."ext".DS);
+		Constant::register("PATH_LOG"			, PATH_PROJECT."log".DS);
+		Constant::register("PATH_TASK"			, PATH_PROJECT."task".DS);
+		Constant::register("PATH_MODULE"		, PATH_PROJECT."module".DS);
 		
 	}
 
