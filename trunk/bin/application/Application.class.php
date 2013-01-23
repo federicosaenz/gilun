@@ -120,7 +120,6 @@ final class Application extends Singleton {
 	}
 	
 	public function getDomain() {
-		debug_print_backtrace();
 		return $this->env->domain;
 	}
 }
