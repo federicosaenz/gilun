@@ -21,13 +21,11 @@ final class Boot {
 	 * Ejecuta el codigo inicial de configuracion del framework
 	 * @return void;
 	 */
-	public static function run() {
+	public static function run($class="Application") {
 		self::runAutoload();
-//		self::includeGlobalFiles();
-//		self::defineGlobalConstants();
 		
 		Autoload::run();
-		Application::getInstance()->run();
+		$class::getInstance()->run();
 	}
 
 	
