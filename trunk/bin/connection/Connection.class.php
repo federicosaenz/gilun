@@ -28,7 +28,13 @@ class Connection extends Singleton {
 			$this->setConnection($connection->name,$connection->driver,$connection->read,$connection->write);
 		}
 	}
-
+	/**
+	 * Devuelve un array con todas las conexiones
+	 * @return array
+	 */
+	public function getConnections() {
+		return $this->connections;
+	}
 
 	/**
 	 * Agrega una conexion a la coleccion de conexiones
@@ -65,10 +71,11 @@ class Connection extends Singleton {
 	 * @param string $name
 	 * @return Mysql
 	 */
-	public function getConnection($name=null) {
+	public function getConnection($name=null,$type=null) {
 		if($name) {
-			return $this->connections[$name];
+			return $type ? $this->connections[$name][$type] : $this->connections[$name][$this->actualType];
 		}
+		
 		return $this->connections[$this->actualConnection][$this->actualType];
 	}
 
