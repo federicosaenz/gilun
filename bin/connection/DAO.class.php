@@ -13,7 +13,7 @@ abstract class DAO {
 	private $engine;
 	
 	public function __construct() {
-		$this->engine = Connection::getInstance()->getConnection();
+		$this->engine = ($this::CONNECTION_NAME) ? Connection::getInstance()->getConnection($this::CONNECTION_NAME) : Connection::getInstance()->getConnection();
 	}
 
 	public function getType($property) {

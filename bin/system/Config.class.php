@@ -120,7 +120,6 @@ final class Config {
 				$dbFile = PATH_CONFIG.self::$env->name.DS.self::DATABASE_FILE;
 			}
 			self::$connection = self::getJson($dbFile);
-			
 			if(!is_array(self::$connection->connections)) {
 				#Excepcion de que no existen conexiones a la BD
 			}
