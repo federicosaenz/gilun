@@ -50,6 +50,10 @@ abstract class DAO {
 		return $this->engine->save($query,$insertDate,$this);
 	}
 
+	public function update($query) {
+		return $this->engine->update($query);
+	}
+	
 	public function escape($value,$type) {
 		if (preg_match("@int@",$type)) {
 			return (int)$value;

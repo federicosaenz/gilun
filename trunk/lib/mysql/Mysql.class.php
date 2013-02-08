@@ -88,6 +88,7 @@ final class Mysql implements IConnection {
 			$where = "";
 			$first = true;
 			$firstValue = true;
+			
 			foreach($context->properties as $name=>$value) {
 				if($first) {
 					$fields .= "`".$name."`";
@@ -100,7 +101,7 @@ final class Mysql implements IConnection {
 					$first = false;
 				} else {
 					$fields .= ",`".$name."`";
-					if($value["value"]) {
+					if(!is_null($value["value"])) {
 						if($firstValue) {
 							$firstValue = false;
 							$where .= "WHERE ".$name."='".$value["value"]."' ";
@@ -163,7 +164,15 @@ final class Mysql implements IConnection {
 		$MysqlResult = new MysqlResult($this->mysqli);
 		return $MysqlResult->fetch_object();
 	}
-
+	/**
+	 * Hace un update directo en la base de datos, sin devolver nada
+	 * @param string $query
+	 * @return void;
+	 */
+	public function update($query) {
+		$this->query($query, $return=false);
+	}
+	
 	/**
 	 * Graba un registro en la base de datos. Si esta seteada la primary key, hace un update, caso contrario hace un insert
 	 * @param string $query
@@ -181,7 +190,7 @@ final class Mysql implements IConnection {
 				}
 			}
 		} else {
-			
+			$this->query($query);
 		}
 	}
 
